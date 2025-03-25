@@ -82,4 +82,5 @@ System.out.println("De tu lista de numeros, el maximo es " + maximo + "y el mini
 	}
 }
 en mi codigo los errores eran que en primera, minimo y maximo valdrian la primera posicion una y otra vez. El otro, es que
- al no inicializar las variables (darles valores al inicio), no funcionaria el printf ya que en java si a una variable no la inicializas, no importa si luego le das un valor en un bucle*/
+ al no inicializar las variables (darles valores al inicio), no funcionaria el printf ya que en java si a una variable no la inicializas, 
+no importa si luego le das un valor en un bucle. Afuera de uno si te deja*/
