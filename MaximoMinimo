@@ -31,3 +31,55 @@ public class Main {
         System.out.println("De tu lista de numeros, el maximo es " + maximo + " y el minimo es " + minimo);
     }
 }
+
+/* import java.util.Scanner;
+public class Main
+{
+	public static void main(String[] args) {
+	Scanner s = new Scanner(System.in);
+	int[] numeros = new int[5];
+	int n;
+	int minimo;
+	int maximo;
+	 System.out.println("Ingrese 5 numeros");
+	for(int i = 0; i < numeros.length; i++){
+	    	 n = s.nextInt();
+	    	 numeros[i] = n;
+	    	 if(minimo > n){
+	    	     minimo = n;
+	    	 }
+	    	 	 if(maximo < n){
+	    	     maximo = n;
+	    	 }
+	    	 
+	 }
+System.out.println("De tu lista de numeros, el maximo es " + maximo + "y el minimo es " + minimo);
+	}
+} import java.util.Scanner;
+public class Main
+{
+	public static void main(String[] args) {
+	Scanner s = new Scanner(System.in);
+	int[] numeros = new int[5];
+	int n;
+	int minimo;
+	int maximo;
+	 System.out.println("Ingrese 5 numeros");
+	for(int i = 0; i < numeros.length; i++){
+	    	 n = s.nextInt();
+	    	 numeros[i] = n;
+	    	 minimo = numeros[0];
+	    	 maximo = numeros[0];
+	    	 if(minimo > n){
+	    	     minimo = n;
+	    	 }
+	    	 	 if(maximo < n){
+	    	     maximo = n;
+	    	 }
+	    	 
+	 }
+System.out.println("De tu lista de numeros, el maximo es " + maximo + "y el minimo es " + minimo);
+	}
+}
+en mi codigo los errores eran que en primera, minimo y maximo valdrian la primera posicion una y otra vez. El otro, es que
+ al no inicializar las variables (darles valores al inicio), no funcionaria el printf ya que en java si a una variable no la inicializas, no importa si luego le das un valor en un bucle*/
