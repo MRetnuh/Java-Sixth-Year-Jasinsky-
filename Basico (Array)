@@ -10,7 +10,8 @@ public class LlenarArray {
 
         // Imprimimos el contenido del array
         System.out.println("Contenido del array:");
-        for (int numero : numeros) { //esto es un for each. Ademas, .length y el for each se utilizan con arrays
+        for (int numero : numeros) { //esto es un for each. Ademas, .length y el for each se utilizan con arrays. La unica funcion de 
+un for each es recorrer un array y mostrar/imprimir sus valores. No puede modificar el array. Ademas, numero pasa a valer el valor de cada posicion del array
             System.out.println(numero);
         }
     }
