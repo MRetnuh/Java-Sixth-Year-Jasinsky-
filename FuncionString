@@ -1,0 +1,31 @@
+public class PrimerEjercicio {
+
+    // Función que devuelve una matriz de Strings
+    public static String[][] crearMatrizDeStrings() {
+        // Crear una matriz 3x3 de Strings
+        String[][] matriz = new String[3][3];
+        
+        // Llenar la matriz con valores de tipo String
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                matriz[i][j] = "Elemento " + (i + 1) + "," + (j + 1);  // Ejemplo de llenado
+            }
+        }
+        
+        // Devolver la matriz
+        return matriz;
+    }
+
+    public static void main(String[] args) {
+        // Llamar a la función para obtener la matriz
+        String[][] matriz = crearMatrizDeStrings();
+
+        // Imprimir la matriz
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.print(matriz[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+}
