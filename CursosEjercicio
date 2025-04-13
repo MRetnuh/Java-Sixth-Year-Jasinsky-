@@ -44,6 +44,7 @@ public class Principal {
                           precioMinimo, cantidadCursos, cursos, columnaId, columnaTitulo, columnaInstructor, columnaCategoria, 
                           columnaNivel, columnaDuracion, columnaPrecio, columnaCalificacion, categorias, niveles);
         } while(opcion != 11);
+        s.close();
     }
 
     public static int mostrarMenuYElegirOpcion(Scanner s, final int min, final int max) {
@@ -118,31 +119,71 @@ public class Principal {
             	     }
                 break;
             case 3:
+            	if(cantidadCursos[0] > 0) {
                 modificarCurso(scanner, idMinimo, idMaximo, maxCursos, valoresCurso, categoriaMinima, categoriaMaxima, 
                         nivelMinimo, nivelMaximo, calificacionMinima, calificacionMaxima, duracionMinima, 
                         precioMinimo, cantidadCursos, cursos, columnaId, columnaTitulo);
+            	}
+            	else {
+           		 System.out.println("No hay cursos");
+           	     }
                 break;
-            case 4:    
-                System.out.println("Opción 4");
+            case 4:  
+            	if(cantidadCursos[0] > 0) {
+            	eliminarCurso(scanner, cursos, idMinimo, idMaximo, cantidadCursos, columnaId, columnaTitulo);
+            	}
+            	else {
+              		 System.out.println("No hay cursos");
+              	     }
                 break;
             case 5:
+            	if(cantidadCursos[0] > 0) {
                 listarCursos(cursos, cantidadCursos, columnaId, columnaTitulo, columnaInstructor, columnaCategoria, 
                         columnaNivel, columnaDuracion, columnaPrecio, columnaCalificacion, categorias, niveles);
+            	}
+            	else {
+             		 System.out.println("No hay cursos");
+             	     }
                 break;
             case 6:
+            	if(cantidadCursos[0] > 0) {
                 System.out.println("Opción 6");
+            	}
+            	else {
+            		 System.out.println("No hay cursos");
+            	     }
                 break;
             case 7:
-                System.out.println("Opción 7");
+            	if(cantidadCursos[0] > 0) {
+                    System.out.println("Opción 7");
+                	}
+                	else {
+                		 System.out.println("No hay cursos");
+                	     }
                 break;
             case 8:
-                System.out.println("Opción 8");
+            	if(cantidadCursos[0] > 0) {
+                    System.out.println("Opción 8");
+                	}
+                	else {
+                		 System.out.println("No hay cursos");
+                	     }
                 break;
             case 9:
-                System.out.println("Opción 9");
+            	if(cantidadCursos[0] > 0) {
+                    System.out.println("Opción 9");
+                	}
+                	else {
+                		 System.out.println("No hay cursos");
+                	     }
                 break;
             case 10:
-                System.out.println("Opción 10");
+            	if(cantidadCursos[0] > 0) {
+                    System.out.println("Opción 10");
+                	}
+                	else {
+                		 System.out.println("No hay cursos");
+                	     }
                 break;
             case 11:
                 System.out.println("Gracias por usar este codigo");
@@ -310,6 +351,15 @@ public class Principal {
 	 cursos[cursoElegido] = cursoCambiado;
 	 cantidadCursos[0]--;
 	 
+ }
+ public static void eliminarCurso(Scanner s, final String[][] cursos, final int idMinimo, final int idMaximo, 
+		 int[] cantidadCursos, final int columnaId, final int columnaTitulo) {
+	 int cursoEliminado = buscarCurso(s, cursos, idMinimo, idMaximo, cantidadCursos, columnaId, columnaTitulo);
+	for(int i = cursoEliminado; i < cantidadCursos[0] - 1; i++) {
+		cursos[i] = cursos[i +1];
+	}
+	System.out.println("El curso se ha eliminado correctamente");
+	cantidadCursos[0]--;
  }
     public static int cargarDatosPrueba(final String[][] cursos) {
         final int cantidadItems = 10;
