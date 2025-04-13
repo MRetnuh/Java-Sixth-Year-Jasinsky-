@@ -118,7 +118,9 @@ public class Principal {
             	     }
                 break;
             case 3:
-                System.out.println("Opción 3");
+                modificarCurso(scanner, idMinimo, idMaximo, maxCursos, valoresCurso, categoriaMinima, categoriaMaxima, 
+                        nivelMinimo, nivelMaximo, calificacionMinima, calificacionMaxima, duracionMinima, 
+                        precioMinimo, cantidadCursos, cursos, columnaId, columnaTitulo);
                 break;
             case 4:    
                 System.out.println("Opción 4");
@@ -148,7 +150,7 @@ public class Principal {
         }
     }
 
-    public static void cargarCurso(Scanner scanner, final int idMinimo, final int idMaximo, final int maxCursos, 
+    public static String[]cargarCurso(Scanner scanner, final int idMinimo, final int idMaximo, final int maxCursos, 
                                    final int valoresCurso, final int categoriaMinima, final int categoriaMaxima, 
                                    final int nivelMinimo, final int nivelMaximo, final int calificacionMinima, 
                                    final int calificacionMaxima, final int duracionMinima, final int precioMinimo, 
@@ -202,6 +204,7 @@ public class Principal {
         cursos[cantidadCursos[0]] = nuevoCurso;
         cantidadCursos[0]++;  // Aumentamos la cantidad de cursos
         System.out.println("\nSe ha ingresado correctamente el nuevo curso");
+        return nuevoCurso;
     }
 
     public static void listarCursos(final String[][] CURSOS, int []cantidadCursos, final int columnaId, final int columnaTitulo, 
@@ -295,7 +298,17 @@ public class Principal {
 	 }
 	 return idEncontrada;
  }
- public static void modificarCurso(final String[][]cursos) {
+ public static void modificarCurso(Scanner s, final int idMinimo, final int idMaximo, final int maxCursos, 
+         final int valoresCurso, final int categoriaMinima, final int categoriaMaxima, 
+         final int nivelMinimo, final int nivelMaximo, final int calificacionMinima, 
+         final int calificacionMaxima, final int duracionMinima, final int precioMinimo, 
+         int[] cantidadCursos, final String[][] cursos, final int columnaId, final int columnaTitulo) {
+	 int cursoElegido = buscarCurso(s, cursos, idMinimo, idMaximo, cantidadCursos, columnaId, columnaTitulo);
+	 String[] cursoCambiado =   cargarCurso(s, idMinimo, idMaximo, maxCursos, valoresCurso, categoriaMinima, categoriaMaxima, 
+             nivelMinimo, nivelMaximo, calificacionMinima, calificacionMaxima, duracionMinima, 
+             precioMinimo, cantidadCursos, cursos, columnaId);
+	 cursos[cursoElegido] = cursoCambiado;
+	 cantidadCursos[0]--;
 	 
  }
     public static int cargarDatosPrueba(final String[][] cursos) {
