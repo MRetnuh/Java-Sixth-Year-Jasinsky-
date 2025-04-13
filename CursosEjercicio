@@ -98,14 +98,24 @@ public class Principal {
                                       final int columnaDuracion, final int columnaPrecio, final int columnaCalificacion,  final String [] categorias,  final String [] niveles) {
         switch(opcion) {
             case 1:
+            	if(cantidadCursos[0] < maxCursos) {
                 cargarCurso(scanner, idMinimo, idMaximo, maxCursos, valoresCurso, categoriaMinima, categoriaMaxima, 
                             nivelMinimo, nivelMaximo, calificacionMinima, calificacionMaxima, duracionMinima, 
-                            precioMinimo, cantidadCursos, cursos);
+                            precioMinimo, cantidadCursos, cursos, columnaId);
+            	}
+            	else {
+            		  System.out.println("No hay espacio suficiente. Se alcanzo el limite maximo de cursos. Elimine cursos si quiere ingresar mas");
+            	}
                 break;
             case 2:
+            	if(cantidadCursos[0] > 0) {
             	int curso = buscarCurso(scanner, cursos, idMinimo, idMaximo, cantidadCursos, columnaId, columnaTitulo);
             	consultarCurso(curso, cursos, columnaId, columnaTitulo, columnaInstructor, columnaCategoria, 
                         columnaNivel, columnaDuracion, columnaPrecio, columnaCalificacion, categorias, niveles);
+            	}
+            	else {
+            		 System.out.println("No hay cursos");
+            	     }
                 break;
             case 3:
                 System.out.println("Opción 3");
@@ -142,7 +152,7 @@ public class Principal {
                                    final int valoresCurso, final int categoriaMinima, final int categoriaMaxima, 
                                    final int nivelMinimo, final int nivelMaximo, final int calificacionMinima, 
                                    final int calificacionMaxima, final int duracionMinima, final int precioMinimo, 
-                                   int[] cantidadCursos, final String[][] cursos) {
+                                   int[] cantidadCursos, final String[][] cursos, final int columnaId) {
         String nuevoCurso[];
         boolean comprobador = false;
         String id, titulo, instructor, categoria, nivel, duracion, precio, calificacion;
@@ -151,6 +161,12 @@ public class Principal {
             System.out.println("\nIngrese la ID del curso ");
             id = scanner.nextLine();
             comprobador = ingresarEntero(scanner, id, idMinimo, idMaximo);
+            for(int i = 0; i < cantidadCursos[0]; i++) {
+   			 if(id.equals(cursos[i][columnaId])) {
+   				System.out.println("\nEsa id ya existe. Ingrese otra");
+   				comprobador = true;
+   			 }
+            }
         } while(comprobador);
         System.out.println("\nIngrese el Título del curso");
         titulo = scanner.nextLine();
@@ -209,6 +225,7 @@ public class Principal {
  public static int buscarCurso(Scanner s, final String[][] CURSOS, final int idMinima, final int idMaxima, 
 		 int[] cantidadCursos, final int columnaId, final int columnaTitulo) {
 	 String opcion;
+	 String titulo;
 	 int id;
      boolean error = false;
      int opc;
@@ -235,6 +252,13 @@ public class Principal {
 		 break;
 	 case 2:
 		 System.out.println("2) Ingrese el titulo:");
+		 titulo = s.nextLine();
+		 for(int i = 0; i < cantidadCursos[0]; i++) {
+			 if(titulo.equalsIgnoreCase(CURSOS[i][columnaTitulo])) {
+				 posicionCurso = i;
+			 }
+		 }
+		 
 	 }
 	 return posicionCurso;
  }
@@ -242,8 +266,8 @@ public class Principal {
          final int columnaInstructor, final int columnaCategoria, final int columnaNivel,  final int columnaDuracion, 
          final int columnaPrecio, final int columnaCalificacion, final String [] categorias,  final String [] niveles) {
 	 if(curso > -1) {
-     System.out.println("\nCurso Número: " + (curso + 1) + "\n");
-	 System.out.println("\n\nid: " + cursos[curso][columnaId]);
+     System.out.println("Curso Número: " + (curso + 1));
+	 System.out.println("\nid: " + cursos[curso][columnaId]);
 	 System.out.println("titulo: " + cursos[curso][columnaTitulo]);
 	 System.out.println("instructor: " + cursos[curso][columnaInstructor]);
 	 System.out.println("categoria: " + categorias[Integer.parseInt(cursos[curso][columnaCategoria]) - 1]);
@@ -270,6 +294,9 @@ public class Principal {
 			 }
 	 }
 	 return idEncontrada;
+ }
+ public static void modificarCurso(final String[][]cursos) {
+	 
  }
     public static int cargarDatosPrueba(final String[][] cursos) {
         final int cantidadItems = 10;
