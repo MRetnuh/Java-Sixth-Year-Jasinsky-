@@ -1,0 +1,281 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class Principal {
+    public static void main(String[] args) {
+        final int idMinimo = 90;
+        final int idMaximo = 900;
+        final int maxCursos = 90;
+        final int valoresCurso = 8;
+        final int categoriaMinima = 1;
+        final int categoriaMaxima = 7;
+        final int nivelMinimo = 1;
+        final int nivelMaximo = 4;
+        final int calificacionMinima = 0;
+        final int calificacionMaxima = 5;
+        final int duracionMinima = 1;
+        final int precioMinimo = 1;
+        int[] cantidadCursos = {0}; 
+        final int opcionMinima= 1;
+        final int opcionMaxima = 11;
+        final int columnaId = 0;
+        final int columnaTitulo = 1;
+        final int columnaInstructor = 2;
+        final int columnaCategoria = 3;
+        final int columnaNivel = 4;
+        final int columnaDuracion = 5;
+        final int columnaPrecio = 6;
+        final int columnaCalificacion = 7;
+        final String[][] cursos = new String[maxCursos][valoresCurso];
+        final String [] categorias = {"Programación", "Diseño","Marketing","Negocios","Idiomas","Música","Otros"};
+        final String[] niveles = { "Principiante", "Intermedio", "Avanzado", "Todos los niveles" };
+        boolean MODO_PRUEBA = true;
+        Scanner s = new Scanner(System.in);
+        int opcion = 0;
+        
+        if(MODO_PRUEBA) {
+            cantidadCursos[0] = cargarDatosPrueba(cursos);  // Cargar datos de prueba y actualizar cantidadCursos
+        }
+        
+        do {
+            opcion = mostrarMenuYElegirOpcion(s, opcionMinima, opcionMaxima);
+            generarAccion(opcion, s, idMinimo, idMaximo, maxCursos, valoresCurso, categoriaMinima, categoriaMaxima, 
+                          nivelMinimo, nivelMaximo, calificacionMinima, calificacionMaxima, duracionMinima, 
+                          precioMinimo, cantidadCursos, cursos, columnaId, columnaTitulo, columnaInstructor, columnaCategoria, 
+                          columnaNivel, columnaDuracion, columnaPrecio, columnaCalificacion, categorias, niveles);
+        } while(opcion != 11);
+    }
+
+    public static int mostrarMenuYElegirOpcion(Scanner s, final int min, final int max) {
+        String opcion;
+        boolean error = false;
+        int opc;
+        do {
+            System.out.println("\nIngrese la acción que desea realizar:");
+            System.out.println("1) Agregar curso");
+            System.out.println("2) Consultar curso");
+            System.out.println("3) Modificar curso");
+            System.out.println("4) Eliminar curso");
+            System.out.println("5) Listar todos los cursos");
+            System.out.println("6) Buscar cursos por categoría");
+            System.out.println("7) Buscar cursos por nivel");
+            System.out.println("8) Buscar cursos por rango de precio");
+            System.out.println("9) Buscar cursos mejor calificados");
+            System.out.println("10) Calcular estadísticas de la plataforma");
+            System.out.println("11) Salir \n");
+            opcion = s.nextLine();
+            error = ingresarEntero(s, opcion, min, max);
+        } while(error);
+        opc = Integer.valueOf(opcion);
+        return opc;
+    }
+
+    public static boolean ingresarEntero(Scanner s, String opcion, final int min, final int max) {
+        boolean num = false;
+        int numero;
+        try {
+            numero = Integer.valueOf(opcion);
+            if(numero > max || numero < min) {
+                System.out.println("Ingrese un número válido");
+                num = true;
+            }
+        } catch(InputMismatchException e){
+            System.out.println("Ingrese un número");
+            num = true;
+        } catch(Exception e){
+            System.out.println("Error");
+            num = true;
+        }
+        return num;
+    }
+
+    public static void generarAccion(int opcion, Scanner scanner, final int idMinimo, final int idMaximo, final int maxCursos, 
+                                      final int valoresCurso, final int categoriaMinima, final int categoriaMaxima, 
+                                      final int nivelMinimo, final int nivelMaximo, final int calificacionMinima, 
+                                      final int calificacionMaxima, final int duracionMinima, final int precioMinimo, 
+                                      int[] cantidadCursos, final String[][] cursos, final int columnaId, final int columnaTitulo, 
+                                      final int columnaInstructor, final int columnaCategoria, final int columnaNivel, 
+                                      final int columnaDuracion, final int columnaPrecio, final int columnaCalificacion,  final String [] categorias,  final String [] niveles) {
+        switch(opcion) {
+            case 1:
+                cargarCurso(scanner, idMinimo, idMaximo, maxCursos, valoresCurso, categoriaMinima, categoriaMaxima, 
+                            nivelMinimo, nivelMaximo, calificacionMinima, calificacionMaxima, duracionMinima, 
+                            precioMinimo, cantidadCursos, cursos);
+                break;
+            case 2:
+            	buscarCurso(scanner, cursos, idMinimo, idMaximo, cantidadCursos, columnaId, columnaTitulo);
+                break;
+            case 3:
+                System.out.println("Opción 3");
+                break;
+            case 4:    
+                System.out.println("Opción 4");
+                break;
+            case 5:
+                listarCursos(cursos, cantidadCursos, columnaId, columnaTitulo, columnaInstructor, columnaCategoria, 
+                        columnaNivel, columnaDuracion, columnaPrecio, columnaCalificacion, categorias, niveles);
+                break;
+            case 6:
+                System.out.println("Opción 6");
+                break;
+            case 7:
+                System.out.println("Opción 7");
+                break;
+            case 8:
+                System.out.println("Opción 8");
+                break;
+            case 9:
+                System.out.println("Opción 9");
+                break;
+            case 10:
+                System.out.println("Opción 10");
+                break;
+            case 11:
+                System.out.println("Opción 11");
+                break;
+        }
+    }
+
+    public static void cargarCurso(Scanner scanner, final int idMinimo, final int idMaximo, final int maxCursos, 
+                                   final int valoresCurso, final int categoriaMinima, final int categoriaMaxima, 
+                                   final int nivelMinimo, final int nivelMaximo, final int calificacionMinima, 
+                                   final int calificacionMaxima, final int duracionMinima, final int precioMinimo, 
+                                   int[] cantidadCursos, final String[][] cursos) {
+        String nuevoCurso[];
+        boolean comprobador = false;
+        String id, titulo, instructor, categoria, nivel, duracion, precio, calificacion;
+        int maxValue = Integer.MAX_VALUE;
+        do {
+            System.out.println("\nIngrese la ID del curso ");
+            id = scanner.nextLine();
+            comprobador = ingresarEntero(scanner, id, idMinimo, idMaximo);
+        } while(comprobador);
+        System.out.println("\nIngrese el Título del curso");
+        titulo = scanner.nextLine();
+        System.out.println("\nIngrese el Nombre del Instructor del curso");
+        instructor = scanner.nextLine();
+        do {
+            System.out.println("\nIngrese la categoría del curso (1 para Programación, 2 para Diseño, 3 para Marketing, 4 para Negocios, 5 para Idiomas, 6 para Música, 7 para Otros)");
+            categoria = scanner.nextLine();
+            comprobador = ingresarEntero(scanner, categoria, categoriaMinima, categoriaMaxima);
+        } while(comprobador);
+        do {
+            System.out.println("\nIngrese el Nivel del curso (1 para Principiante, 2 para Intermedio, 3 para Avanzado, 4 para Todos los niveles)");
+            nivel = scanner.nextLine();
+            comprobador = ingresarEntero(scanner,nivel, nivelMinimo, nivelMaximo);
+        } while(comprobador);
+        do {
+            System.out.println("\nIngrese la Duración del curso en cantidad de horas totales");
+            duracion = scanner.nextLine();
+            comprobador = ingresarEntero(scanner,duracion, duracionMinima, maxValue);
+        } while(comprobador);
+        do {
+            System.out.println("\nIngrese el Precio del curso");
+            precio = scanner.nextLine();
+            comprobador = ingresarEntero(scanner,precio, precioMinimo, maxValue);
+        } while(comprobador);
+        do {
+            System.out.println("\nIngrese la Calificación del curso (1 a 5)");
+            calificacion = scanner.nextLine();
+            comprobador = ingresarEntero(scanner,calificacion, calificacionMinima, calificacionMaxima);
+        } while(comprobador);
+        
+        nuevoCurso = new String[]{id, titulo, instructor, categoria, nivel, duracion, precio, calificacion};
+        cursos[cantidadCursos[0]] = nuevoCurso;
+        cantidadCursos[0]++;  // Aumentamos la cantidad de cursos
+        System.out.println("\nSe ha ingresado correctamente el nuevo curso");
+    }
+
+    public static void listarCursos(final String[][] CURSOS, int []cantidadCursos, final int columnaId, final int columnaTitulo, 
+            final int columnaInstructor, final int columnaCategoria, final int columnaNivel,  final int columnaDuracion, 
+            final int columnaPrecio, final int columnaCalificacion, final String [] categorias,  final String [] niveles) {
+        for (int i = 0; i < cantidadCursos[0]; i++) {
+            if (CURSOS[i] != null) {
+                System.out.println("\nCurso Número: " + (i + 1) + "\n");
+                System.out.println("ID: " + CURSOS[i][columnaId]);
+                System.out.println("Título: " + CURSOS[i][columnaTitulo]);
+                System.out.println("Instructor: " + CURSOS[i][columnaInstructor]);
+                System.out.println("Categoría: " + categorias[Integer.parseInt(CURSOS[i][columnaCategoria]) - 1]);
+                System.out.println("Nivel: " + niveles[Integer.parseInt(CURSOS[i][columnaNivel]) - 1]);
+                System.out.println("Duración: " + CURSOS[i][columnaDuracion] + "hs");
+                System.out.println("Precio: $" + CURSOS[i][columnaPrecio]);
+                System.out.println("Calificación: " + CURSOS[i][columnaCalificacion] + " estrellas");
+                System.out.println("\n\n");
+            }
+        }
+    }
+ public static void buscarCurso(Scanner s, final String[][] CURSOS, final int idMinima, final int idMaxima, 
+		 int[] cantidadCursos, final int columnaId, final int columnaTitulo) {
+	 String opcion;
+	 int id;
+     boolean error = false;
+     int opc;
+	 final int primeraOpcion = 1;
+	 final int segundaOpcion = 2;
+	 do {
+	  System.out.println("Como quiere buscar el curso? Elija el numero de la opcion");
+	  System.out.println("1) Id");
+	  System.out.println("2) Titulo");
+	  opcion = s.nextLine();
+	 error = ingresarEntero(s, opcion, primeraOpcion, segundaOpcion);
+	 }while(error);
+	 opc = Integer.valueOf(opcion);
+	 switch(opc) {
+	 case 1:
+		 System.out.println("1) Ingrese la id correspondiente (debe estar entre " +  idMinima + " y " + idMaxima + ")");
+		 id = validarID(CURSOS, cantidadCursos, idMinima, idMaxima, s, columnaId);
+		 if(id > 0) {
+			 
+		 }
+		 break;
+	 case 2:
+		 System.out.println("2) Ingrese el titulo:");
+	 }
+ }
+ public static void consultarCurso(int id, final String[][] cursos, final int columnaId, final int columnaTitulo, 
+         final int columnaInstructor, final int columnaCategoria, final int columnaNivel,  final int columnaDuracion, 
+         final int columnaPrecio, final int columnaCalificacion, final String [] categorias,  final String [] niveles) {
+	 System.out.println("\n\nid: " + cursos[id][columnaId]);
+	 System.out.println("titulo: " + cursos[id][columnaTitulo]);
+	 System.out.println("instructor: " + cursos[id][columnaInstructor]);
+	 System.out.println("categoria: " + categorias[Integer.parseInt(cursos[id][columnaCategoria]) - 1]);
+	 System.out.println("nivel: " + niveles[Integer.parseInt(cursos[id][columnaNivel]) - 1]);
+	 System.out.println("duracion: " + cursos[id][columnaDuracion] + "hs");
+	 System.out.println("precio: $" + cursos[id][columnaPrecio]);
+	 System.out.println("calificacion: " + cursos[id][columnaCalificacion] + " estrellas\n\n");
+
+ }
+ public static int validarID(final String[][]cursos, int[] cantidadCursos, final int idMinima, final int idMaxima, Scanner s, final int columnaId) {
+	 String id;
+	 final int noId = -1;
+	 int idEncontrada = 0;
+	 boolean error = false;
+	 do {
+		 id = s.nextLine();
+		 error =  ingresarEntero(s, id, idMinima, idMaxima);
+	 }while(error);
+	 idEncontrada = Integer.valueOf(id);
+	 for(int i = 0; i < cantidadCursos[0]; i++) {
+		 if(idEncontrada != Integer.parseInt(cursos[i][columnaId])) {
+			 idEncontrada = -1;
+			 System.out.println("Id no encontrada"); 
+		 }
+	 }
+	 return idEncontrada;
+ }
+    public static int cargarDatosPrueba(final String[][] cursos) {
+        final int cantidadItems = 10;
+        cursos[0] = new String[]{"101", "Java desde cero", "Juan Pérez", "1", "1", "30", "5000", "5"};
+        cursos[1] = new String[]{"102", "Diseño UX", "Laura Gómez", "2", "2", "25", "6000", "4"};
+        cursos[2] = new String[]{"103", "Marketing Digital", "Carlos Díaz", "3", "1", "20", "4500", "3"};
+        cursos[3] = new String[]{"104", "Negocios Exitosos", "Marta Ruiz", "4", "3", "40", "7000", "5"};
+        cursos[4] = new String[]{"105", "Inglés Básico", "Robert Smith", "5", "1", "35", "5500", "4"};
+        cursos[5] = new String[]{"106", "Guitarra para principiantes", "Carlos Sánchez", "6", "2", "50", "4000", "5"};
+        cursos[6] = new String[]{"107", "Curso de filosofía", "Carlos Martínez", "7", "3", "15", "2000", "5"};
+        cursos[7] = new String[]{"108", "Curso de ciencias sociales", "Javier López", "7", "4", "10", "1500", "3"};
+        cursos[8] = new String[]{"109", "Python para Data Science", "Ana López", "1", "2", "60", "8000", "5"};
+        cursos[9] = new String[]{"110", "Introducción al Marketing", "María Pérez", "3", "1", "40", "6500", "4"};
+        
+        return cantidadItems; 
+    }
+}
