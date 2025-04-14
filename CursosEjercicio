@@ -187,7 +187,8 @@ public class Principal {
                 break;
             case 10:
             	if(cantidadCursos[0] > 0) {
-                    System.out.println("Opción 10");
+                    calcularEstadisticas(cursos, columnaId, columnaTitulo, columnaInstructor, columnaCategoria, 
+                            columnaNivel, columnaDuracion, columnaPrecio, columnaCalificacion, categorias, niveles, categoriaMaxima, nivelMaximo, cantidadCursos);
                 	}
                 	else {
                 		 System.out.println("No hay cursos");
@@ -518,7 +519,46 @@ public class Principal {
 		  if(noCursos && !siCursos) {
 			  System.out.println("No hay cursos con ese precio");
 		  }
+ 
  }
+ public static void calcularEstadisticas(final String[][] cursos, final int columnaId, final int columnaTitulo, 
+         final int columnaInstructor, final int columnaCategoria, final int columnaNivel,  final int columnaDuracion, 
+         final int columnaPrecio, final int columnaCalificacion, final String [] categorias,  final String [] niveles, 
+         final int categoriaMaxima, final int nivelMaximo, int []cantidadCursos) {
+	    int acumuladorCursosPorCategoria [] = new int [categoriaMaxima];
+		int acumuladorCursosPorNivel [] = new int [nivelMaximo];
+		int acumuladorPrecioPorCategoria [] = new int [categoriaMaxima];
+	    float calificacionPromedio = 0;
+	    float duracionPromedio = 0;
+		for (int i = 0; i < cantidadCursos[0]; i++) {
+			acumuladorCursosPorCategoria[Integer.parseInt(cursos[i][columnaCategoria])-1]++;
+			acumuladorCursosPorNivel[Integer.parseInt(cursos[i][columnaNivel])-1]++;
+			acumuladorPrecioPorCategoria[Integer.parseInt(cursos[i][columnaCategoria])-1] += Integer.parseInt(cursos[i][columnaPrecio]);
+			calificacionPromedio += Integer.parseInt(cursos[i][columnaCalificacion]);
+			duracionPromedio += Integer.parseInt(cursos[i][columnaDuracion]);
+		}
+		System.out.println("\n\n");
+		for (int i = 0; i < categoriaMaxima; i++) {
+			System.out.println("Porcentaje de cursos en la categoria "+categorias[i]+" es: "+(acumuladorCursosPorCategoria[i] * 100) / cantidadCursos[0]+"%");
+		}
+		System.out.println("\n\n");
+		for (int i = 0; i < nivelMaximo; i++) {
+			System.out.println("Porcentaje de cursos en el nivel "+niveles[i]+" es: "+(acumuladorCursosPorNivel[i] * 100) / cantidadCursos[0]+"%");
+		}
+		System.out.println("\n\n");
+		for (int i = 0; i < categoriaMaxima; i++) {
+			if (acumuladorCursosPorCategoria[i] != 0) {
+				System.out.println("Precio promedio de cursos en la categoria "+categorias[i]+" es: $"+(acumuladorPrecioPorCategoria[i]/acumuladorCursosPorCategoria[i]));
+			}else {
+				 System.err.println("No hay cursos en la categoría " + categorias[i]);
+			}
+		}
+		System.out.println("\n\n");
+		System.out.println("Calificacion promedio general: " + (calificacionPromedio/cantidadCursos[0])+ " estrellas");
+		System.out.println("\n");
+		System.out.println("Duracion promedio general: " + (duracionPromedio/cantidadCursos[0]) + "hs");
+		System.out.println("\n\n");
+	}
     public static int cargarDatosPrueba(final String[][] cursos) {
         final int cantidadItems = 10;
         cursos[0] = new String[]{"101", "Java desde cero", "Juan Pérez", "1", "1", "30", "5000", "5"};
