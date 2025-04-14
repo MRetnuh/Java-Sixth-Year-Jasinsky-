@@ -147,7 +147,9 @@ public class Principal {
                 break;
             case 6:
             	if(cantidadCursos[0] > 0) {
-                System.out.println("Opción 6");
+                buscarCursosPorCategoria(cursos, columnaId, columnaTitulo, columnaInstructor, columnaCategoria, 
+                        columnaNivel, columnaDuracion, columnaPrecio, columnaCalificacion, categorias, niveles, scanner, 
+                        categoriaMinima, categoriaMaxima, cantidadCursos);
             	}
             	else {
             		 System.out.println("No hay cursos");
@@ -155,7 +157,9 @@ public class Principal {
                 break;
             case 7:
             	if(cantidadCursos[0] > 0) {
-                    System.out.println("Opción 7");
+            		 buscarCursosPorNivel(cursos, columnaId, columnaTitulo, columnaInstructor, columnaCategoria, 
+                             columnaNivel, columnaDuracion, columnaPrecio, columnaCalificacion, categorias, niveles, scanner, 
+                             nivelMinimo, nivelMaximo, cantidadCursos);
                 	}
                 	else {
                 		 System.out.println("No hay cursos");
@@ -163,7 +167,9 @@ public class Principal {
                 break;
             case 8:
             	if(cantidadCursos[0] > 0) {
-                    System.out.println("Opción 8");
+            		buscarCursosPorRangoPrecio(cursos, columnaId, columnaTitulo, columnaInstructor, columnaCategoria, 
+                             columnaNivel, columnaDuracion, columnaPrecio, columnaCalificacion, categorias, niveles, scanner, 
+                             precioMinimo, cantidadCursos);
                 	}
                 	else {
                 		 System.out.println("No hay cursos");
@@ -171,7 +177,9 @@ public class Principal {
                 break;
             case 9:
             	if(cantidadCursos[0] > 0) {
-                    System.out.println("Opción 9");
+                    buscarCursosMejorCalificados(cursos, columnaId, columnaTitulo, columnaInstructor, columnaCategoria, 
+                            columnaNivel, columnaDuracion, columnaPrecio, columnaCalificacion, categorias, niveles, 
+                            cantidadCursos);
                 	}
                 	else {
                 		 System.out.println("No hay cursos");
@@ -361,17 +369,167 @@ public class Principal {
 	System.out.println("El curso se ha eliminado correctamente");
 	cantidadCursos[0]--;
  }
+ public static void buscarCursosPorCategoria(final String[][] cursos, final int columnaId, final int columnaTitulo, 
+         final int columnaInstructor, final int columnaCategoria, final int columnaNivel,  final int columnaDuracion, 
+         final int columnaPrecio, final int columnaCalificacion, final String [] categorias,  final String [] niveles, 
+         Scanner s,  final int categoriaMinima, final int categoriaMaxima, int []cantidadCursos) {
+		System.out.println("Ingrese la categoria que busca (1 para Programación, 2 para Diseño, 3 para Marketing, 4 para Negocios, 5 para Idiomas, 6 para Música, 7 para Otros)");   
+		String opcion;
+		boolean noCursos = false;
+		boolean siCursos = false;
+		boolean error = false;
+		do {
+			opcion = s.nextLine();
+			error = ingresarEntero(s, opcion, categoriaMinima, categoriaMaxima);
+			}while(error);
+		 int opc = Integer.valueOf(opcion);
+		  for (int i = 0; i < cantidadCursos[0]; i++) {
+	            if (cursos[i] != null && opc ==  Integer.valueOf(cursos[i][columnaCategoria])) {
+	            	siCursos = true;
+	                System.out.println("Curso Número: " + (i + 1));
+	                System.out.println("ID: " + cursos[i][columnaId]);
+	                System.out.println("Título: " + cursos[i][columnaTitulo]);
+	                System.out.println("Instructor: " + cursos[i][columnaInstructor]);
+	                System.out.println("Categoría: " + categorias[Integer.parseInt(cursos[i][columnaCategoria]) - 1]);
+	                System.out.println("Nivel: " + niveles[Integer.parseInt(cursos[i][columnaNivel]) - 1]);
+	                System.out.println("Duración: " + cursos[i][columnaDuracion] + "hs");
+	                System.out.println("Precio: $" + cursos[i][columnaPrecio]);
+	                System.out.println("Calificación: " + cursos[i][columnaCalificacion] + " estrellas");
+	                System.out.println("\n\n");
+	            }
+	            else {
+	            	 noCursos = true;
+	            }
+	 
+ }
+		  if(noCursos && !siCursos) {
+			  System.out.println("No hay cursos con esa categoria");
+		  }
+ }
+ public static void buscarCursosPorNivel(final String[][] cursos, final int columnaId, final int columnaTitulo, 
+         final int columnaInstructor, final int columnaCategoria, final int columnaNivel,  final int columnaDuracion, 
+         final int columnaPrecio, final int columnaCalificacion, final String [] categorias,  final String [] niveles, 
+         Scanner s,  final int nivelMinimo, final int nivelMaximo, int []cantidadCursos) {
+		System.out.println("Ingrese el nivel que busca (1 para Principiante, 2 para Intermedio, 3 para Avanzado, 4 para Todos los niveles)");   
+		String opcion;
+		boolean noCursos = false;
+		boolean siCursos = false;
+		boolean error = false;
+		do {
+			opcion = s.nextLine();
+			error = ingresarEntero(s, opcion, nivelMinimo, nivelMaximo);
+			}while(error);
+		 int opc = Integer.valueOf(opcion);
+		  for (int i = 0; i < cantidadCursos[0]; i++) {
+	            if (cursos[i] != null && opc ==  Integer.valueOf(cursos[i][columnaNivel])) {
+	            	siCursos = true;
+	                System.out.println("Curso Número: " + (i + 1));
+	                System.out.println("ID: " + cursos[i][columnaId]);
+	                System.out.println("Título: " + cursos[i][columnaTitulo]);
+	                System.out.println("Instructor: " + cursos[i][columnaInstructor]);
+	                System.out.println("Categoría: " + categorias[Integer.parseInt(cursos[i][columnaCategoria]) - 1]);
+	                System.out.println("Nivel: " + niveles[Integer.parseInt(cursos[i][columnaNivel]) - 1]);
+	                System.out.println("Duración: " + cursos[i][columnaDuracion] + "hs");
+	                System.out.println("Precio: $" + cursos[i][columnaPrecio]);
+	                System.out.println("Calificación: " + cursos[i][columnaCalificacion] + " estrellas");
+	                System.out.println("\n\n");
+	            }
+	            else {
+	            	 noCursos = true;
+	            }
+	 
+ }
+		  if(noCursos && !siCursos) {
+			  System.out.println("No hay cursos con ese nivel");
+		  }
+ }
+ public static void buscarCursosMejorCalificados(final String[][] cursos, final int columnaId, final int columnaTitulo, 
+         final int columnaInstructor, final int columnaCategoria, final int columnaNivel,  final int columnaDuracion, 
+         final int columnaPrecio, final int columnaCalificacion, final String [] categorias,  final String [] niveles, int []cantidadCursos) {
+		int calificacionMaxima = 0;
+		  for (int i = 0; i < cantidadCursos[0]; i++) {
+	            if (calificacionMaxima < Integer.valueOf(cursos[i][columnaCalificacion])) {
+	            	calificacionMaxima =  Integer.valueOf(cursos[i][columnaCalificacion]);
+	            }
+	          
+ } 
+		  System.out.println("La mejor calificacion es " + calificacionMaxima);   
+		  System.out.println("Los cursos con esa calificacion son:");  
+		  for (int i = 0; i < cantidadCursos[0]; i++) {
+	            if (cursos[i] != null && calificacionMaxima ==  Integer.valueOf(cursos[i][columnaCalificacion])) {
+	                System.out.println("Curso Número: " + (i + 1));
+	                System.out.println("ID: " + cursos[i][columnaId]);
+	                System.out.println("Título: " + cursos[i][columnaTitulo]);
+	                System.out.println("Instructor: " + cursos[i][columnaInstructor]);
+	                System.out.println("Categoría: " + categorias[Integer.parseInt(cursos[i][columnaCategoria]) - 1]);
+	                System.out.println("Nivel: " + niveles[Integer.parseInt(cursos[i][columnaNivel]) - 1]);
+	                System.out.println("Duración: " + cursos[i][columnaDuracion] + "hs");
+	                System.out.println("Precio: $" + cursos[i][columnaPrecio]);
+	                System.out.println("Calificación: " + cursos[i][columnaCalificacion] + " estrellas");
+	                System.out.println("\n\n");
+	            }
+		  }
+ }
+ public static void buscarCursosPorRangoPrecio(final String[][] cursos, final int columnaId, final int columnaTitulo, 
+         final int columnaInstructor, final int columnaCategoria, final int columnaNivel,  final int columnaDuracion, 
+         final int columnaPrecio, final int columnaCalificacion, final String [] categorias,  final String [] niveles, 
+         Scanner s,  final int precioMinimo, int []cantidadCursos) {
+	    String primerPrecio, segundoPrecio;
+	    boolean error = false;
+	    int precioMin, precioMax;
+	    int maxValue = Integer.MAX_VALUE;
+		System.out.println("Ingrese el primer precio como minimo");  
+		do {
+			primerPrecio = s.nextLine();
+			error = ingresarEntero(s, primerPrecio, precioMinimo, maxValue);
+			}while(error);
+		precioMin = Integer.valueOf(primerPrecio);
+		System.out.println("Ingrese el segundo precio maximo");  
+		do {
+			segundoPrecio = s.nextLine();
+			error = ingresarEntero(s, primerPrecio, precioMinimo, maxValue);
+			if(Integer.valueOf(segundoPrecio) <= precioMin) {
+				System.out.println("Ingrese un precio que sea mayor al precio minimo");  
+				error = true;
+			}
+			}while(error);
+		precioMax = Integer.valueOf(segundoPrecio);
+		boolean noCursos = false;
+		boolean siCursos = false;
+		  for (int i = 0; i < cantidadCursos[0]; i++) {
+	            if (cursos[i] != null && precioMin <=  Integer.valueOf(cursos[i][columnaPrecio]) &&  precioMax >=  Integer.valueOf(cursos[i][columnaPrecio])) {
+	            	siCursos = true;
+	                System.out.println("Curso Número: " + (i + 1));
+	                System.out.println("ID: " + cursos[i][columnaId]);
+	                System.out.println("Título: " + cursos[i][columnaTitulo]);
+	                System.out.println("Instructor: " + cursos[i][columnaInstructor]);
+	                System.out.println("Categoría: " + categorias[Integer.parseInt(cursos[i][columnaCategoria]) - 1]);
+	                System.out.println("Nivel: " + niveles[Integer.parseInt(cursos[i][columnaNivel]) - 1]);
+	                System.out.println("Duración: " + cursos[i][columnaDuracion] + "hs");
+	                System.out.println("Precio: $" + cursos[i][columnaPrecio]);
+	                System.out.println("Calificación: " + cursos[i][columnaCalificacion] + " estrellas");
+	                System.out.println("\n\n");
+	            }
+	            else {
+	            	 noCursos = true;
+	            }
+	 
+ }
+		  if(noCursos && !siCursos) {
+			  System.out.println("No hay cursos con ese precio");
+		  }
+ }
     public static int cargarDatosPrueba(final String[][] cursos) {
         final int cantidadItems = 10;
         cursos[0] = new String[]{"101", "Java desde cero", "Juan Pérez", "1", "1", "30", "5000", "5"};
-        cursos[1] = new String[]{"102", "Diseño UX", "Laura Gómez", "2", "2", "25", "6000", "4"};
+        cursos[1] = new String[]{"102", "Diseño UX", "Laura Gómez", "2", "2", "25", "6000", "5"};
         cursos[2] = new String[]{"103", "Marketing Digital", "Carlos Díaz", "3", "1", "20", "4500", "3"};
-        cursos[3] = new String[]{"104", "Negocios Exitosos", "Marta Ruiz", "4", "3", "40", "7000", "5"};
+        cursos[3] = new String[]{"104", "Negocios Exitosos", "Marta Ruiz", "4", "3", "40", "7000", "4"};
         cursos[4] = new String[]{"105", "Inglés Básico", "Robert Smith", "5", "1", "35", "5500", "4"};
-        cursos[5] = new String[]{"106", "Guitarra para principiantes", "Carlos Sánchez", "6", "2", "50", "4000", "5"};
-        cursos[6] = new String[]{"107", "Curso de filosofía", "Carlos Martínez", "7", "3", "15", "2000", "5"};
+        cursos[5] = new String[]{"106", "Guitarra para principiantes", "Carlos Sánchez", "6", "2", "50", "4000", "1"};
+        cursos[6] = new String[]{"107", "Curso de filosofía", "Carlos Martínez", "7", "3", "15", "2000", "4"};
         cursos[7] = new String[]{"108", "Curso de ciencias sociales", "Javier López", "7", "4", "10", "1500", "3"};
-        cursos[8] = new String[]{"109", "Python para Data Science", "Ana López", "1", "2", "60", "8000", "5"};
+        cursos[8] = new String[]{"109", "Python para Data Science", "Ana López", "1", "2", "60", "8000", "4"};
         cursos[9] = new String[]{"110", "Introducción al Marketing", "María Pérez", "3", "1", "40", "6500", "4"};
         
         return cantidadItems; 
