@@ -524,24 +524,24 @@ public class Principal {
 		}
 		System.out.println("\n\n");
 		for (int i = 0; i < categoriaMaxima; i++) {
-			System.out.println("Porcentaje de cursos en la categoria "+categorias[i]+" es: "+(acumuladorCursosPorCategoria[i] * 100) / cantidadCursos[0]+"%");
+			System.out.println("Porcentaje de cursos en la categoria "+categorias[i]+" es: "+(float)(acumuladorCursosPorCategoria[i] * 100) / cantidadCursos[0]+"%");
 		}
 		System.out.println("\n\n");
 		for (int i = 0; i < nivelMaximo; i++) {
-			System.out.println("Porcentaje de cursos en el nivel "+niveles[i]+" es: "+(acumuladorCursosPorNivel[i] * 100) / cantidadCursos[0]+"%");
+			System.out.println("Porcentaje de cursos en el nivel "+niveles[i]+" es: "+(float)(acumuladorCursosPorNivel[i] * 100) / cantidadCursos[0]+"%");
 		}
 		System.out.println("\n\n");
 		for (int i = 0; i < categoriaMaxima; i++) {
 			if (acumuladorCursosPorCategoria[i] != 0) {
-				System.out.println("Precio promedio de cursos en la categoria "+categorias[i]+" es: $"+(acumuladorPrecioPorCategoria[i]/acumuladorCursosPorCategoria[i]));
+				System.out.println("Precio promedio de cursos en la categoria "+categorias[i]+" es: $"+((float)acumuladorPrecioPorCategoria[i]/acumuladorCursosPorCategoria[i]));
 			}else {
 				 System.err.println("No hay cursos en la categoría " + categorias[i]);
 			}
 		}
 		System.out.println("\n\n");
-		System.out.println("Calificacion promedio general: " + (calificacionPromedio/cantidadCursos[0])+ " estrellas");
+		System.out.println("Calificacion promedio general: " + ((float)calificacionPromedio/cantidadCursos[0])+ " estrellas");
 		System.out.println("\n");
-		System.out.println("Duracion promedio general: " + (duracionPromedio/cantidadCursos[0]) + "hs");
+		System.out.println("Duracion promedio general: " + ((float)duracionPromedio/cantidadCursos[0]) + "hs");
 		System.out.println("\n\n");
 	}
     public static int cargarDatosPrueba(final String[][] cursos) {
