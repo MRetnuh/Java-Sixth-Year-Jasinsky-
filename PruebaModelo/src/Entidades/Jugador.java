@@ -18,7 +18,8 @@ public void getInformacion() {
 	  System.out.println("Nombre: " + this.nombre);
       System.out.println("Vida: " + this.vida);
       System.out.println("Velocidad de ataque: " + this.velocidadAtaque);
-      System.out.println("Daño: " + this.danio);}
+      System.out.println("Daño: " + this.danio);      
+}
 
 public String getNombre() {
 	return this.nombre;
@@ -75,4 +76,53 @@ public void mostrarArmaduraYArma() {
 		  System.out.println("Nada");
 	  }
 }
+
+public void realizarPelea(Jugador jugador, Jugador enemigo, int primerTurno) {
+    final int JUGADOR_UNO_TURNO = 1;
+    final int JUGADOR_DOS_TURNO = 2;
+    int turnoJugador = primerTurno;
+    boolean partidaTerminada = false;
+
+    System.out.println("Empieza el jugador " + (turnoJugador == JUGADOR_UNO_TURNO ? jugador.nombre : enemigo.nombre));
+
+    do {
+        if (turnoJugador == JUGADOR_UNO_TURNO) {
+            float diferenciaVelocidad = (float) jugador.velocidadAtaque / enemigo.velocidadAtaque;
+
+            for (int i = 0; i < diferenciaVelocidad; i++) {
+                enemigo.vida -= jugador.danio;
+                System.out.println(jugador.nombre + " ha atacado a " + enemigo.nombre + " causando " + jugador.danio + " de daño.");
+
+                if (enemigo.vida <= 0) {
+                    System.out.println(enemigo.nombre + " ha sido derrotado. ¡" + jugador.nombre + " ha ganado!");
+                    partidaTerminada = true;
+                }
+            }
+            
+    if(enemigo.vida > 0) {
+            System.out.println("Vida restante de " + enemigo.nombre + ": " + enemigo.vida);
+            System.out.println("Turno de " + enemigo.nombre);
+            turnoJugador = JUGADOR_DOS_TURNO;
+    }
+        } else {
+            float diferenciaVelocidad = (float)enemigo.velocidadAtaque / jugador.velocidadAtaque;
+
+            for (int i = 0; i < diferenciaVelocidad; i++) {
+                jugador.vida -= enemigo.danio;
+                System.out.println(enemigo.nombre + " ha atacado a " + jugador.nombre + " causando " + enemigo.danio + " de daño.");
+
+                if (jugador.vida <= 0) {
+                    System.out.println(jugador.nombre + " ha sido derrotado. ¡" + enemigo.nombre + " ha ganado!");
+                    partidaTerminada = true;
+                }
+            }
+            if (jugador.vida > 0) {
+            System.out.println("Vida restante de " + jugador.nombre + ": " + jugador.vida);
+            System.out.println("Turno de " + jugador.nombre);
+            turnoJugador = JUGADOR_UNO_TURNO;
+            }
+        }
+    } while (!partidaTerminada);
+}
+
 }

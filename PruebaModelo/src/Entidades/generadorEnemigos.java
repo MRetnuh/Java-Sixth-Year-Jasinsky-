@@ -11,6 +11,7 @@ public class generadorEnemigos {
 	    enemigo = generarNombreEnemigo();
 		System.out.println("El nombre del enemigo es " + enemigo.getNombre());
 		generarArmadura();
+		generarArma();
 		return enemigo;
 	}
 	private void generarArmadura() {
@@ -19,7 +20,9 @@ public class generadorEnemigos {
 	    }
 	}
 
-	
+	private void generarArma() {
+		tienda.asignarArmaAleatoeria(enemigo);
+	}
 	   private void generarElementoArmadura(String tipoElemento) {
 	        tienda.asignarParteAleatoria(tipoElemento, enemigo);
 	    }

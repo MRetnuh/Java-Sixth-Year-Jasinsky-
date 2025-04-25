@@ -5,6 +5,15 @@ import java.util.Random;
 import Utilidades.Utiles;
 
 public class Tienda {
+	final int columnaNombreArma= 0;
+	final int columnaDanio = 1;
+	final int columnaVelocidadCambioArma = 2;
+	final int columnaPrecioArma = 3;
+	final int columnaTipoArmadura= 0;
+	final int columnaNombreArmadura = 1;
+	final int columnaPrecioArmadura = 2;
+	final int columnaVidaAgregada = 3;
+	final int columnaVelocidadCambioArmadura = 4;
 final private String [][] elementosArmadura = {
 		{"Casco","Casco de cuero","500","5","0"},
 		{"Casco","Casco de bronce","800","10","2"},
@@ -79,15 +88,10 @@ public void comprarElementoArmadura(Jugador jugador) {
 	}while(seguirComprando);
 }
 public void comprarParteArmadura(Jugador jugador) {
-    final int columnaTipo= 0;
-	final int columnaNombre = 1;
-	final int columnaPrecio = 2;
-	final int columnaVidaAgregada = 3;
-	final int columnaVelocidadCambio = 4;
 	final int limitePartesAdquiridas = 4;
 	Armadura armadura;
 	boolean comprobador;
-	mostrarPartesArmadura(columnaTipo, columnaNombre, columnaPrecio, columnaVidaAgregada, columnaVelocidadCambio);
+	mostrarPartesArmadura();
 	int opcion;
 	System.out.println("0) Volver a la parte de antes");
 	opcion = Utiles.ingresarEntero(0, elementosArmadura.length);
@@ -97,13 +101,13 @@ public void comprarParteArmadura(Jugador jugador) {
 	if(jugador.getCantidadObjetosAdquiridos() >= limitePartesAdquiridas) {
 		System.out.println("Ya completaste tu armadura, no podes seguir comprando");
 	}
-	if(Integer.valueOf(elementosArmadura[opcion - 1][columnaPrecio]) > jugador.getDinero()) {
+	if(Integer.valueOf(elementosArmadura[opcion - 1][columnaPrecioArmadura]) > jugador.getDinero()) {
 		System.out.println("No tiene la plata suficiente");
 	}
 	else {
-		armadura = new Armadura(elementosArmadura[opcion -1][columnaNombre], elementosArmadura[opcion -1][columnaTipo],
-		Integer.valueOf(elementosArmadura[opcion -1][columnaPrecio]),Integer.valueOf(elementosArmadura[opcion -1][columnaVidaAgregada]), 
-		Integer.valueOf(elementosArmadura[opcion-1][columnaVelocidadCambio]));
+		armadura = new Armadura(elementosArmadura[opcion -1][columnaNombreArmadura], elementosArmadura[opcion -1][columnaTipoArmadura],
+		Integer.valueOf(elementosArmadura[opcion -1][columnaPrecioArmadura]),Integer.valueOf(elementosArmadura[opcion -1][columnaVidaAgregada]), 
+		Integer.valueOf(elementosArmadura[opcion-1][columnaVelocidadCambioArmadura]));
 		comprobador = jugador.comprobadorParteArmadura(armadura.getTipo());
 		if(!comprobador) {
 			System.out.println("Ya posee esa parte");
@@ -119,20 +123,15 @@ public void comprarParteArmadura(Jugador jugador) {
 	
 }
 public void comprarArmas(Jugador jugador) {
-
-	final int columnaNombre= 0;
-	final int columnaDanio = 1;
-	final int columnaVelocidadCambio = 2;
-	final int columnaPrecio = 3;
 	Arma arma;
-	mostrarArmas(columnaNombre, columnaDanio, columnaPrecio, columnaVelocidadCambio);
+	mostrarArmas();
 	int opcion;
 	System.out.println("0) Volver a la parte de antes");
 	opcion = Utiles.ingresarEntero(0, armas.length);
 	if(opcion == 0) {
 		return;
 	}
-	if(Integer.valueOf(armas[opcion - 1][columnaPrecio]) > jugador.getDinero()) {
+	if(Integer.valueOf(armas[opcion - 1][columnaPrecioArma]) > jugador.getDinero()) {
 		System.out.println("No tiene la plata suficiente");
 	}
 	else {
@@ -140,8 +139,8 @@ public void comprarArmas(Jugador jugador) {
 			System.out.println("Ya posees un arma");
 		}
 		else {
-		arma = new Arma(armas[opcion - 1][columnaNombre], Integer.valueOf(armas[opcion - 1][columnaDanio]), 
-		Integer.valueOf(armas[opcion - 1][columnaVelocidadCambio]), Integer.valueOf(armas[opcion - 1][columnaPrecio]));
+		arma = new Arma(armas[opcion - 1][columnaNombreArma], Integer.valueOf(armas[opcion - 1][columnaDanio]), 
+		Integer.valueOf(armas[opcion - 1][columnaVelocidadCambioArma]), Integer.valueOf(armas[opcion - 1][columnaPrecioArma]));
 		jugador.obtenerArma(arma);
 		System.out.println();
 		System.out.println("Adquirio: " + arma.getNombre());
@@ -149,36 +148,29 @@ public void comprarArmas(Jugador jugador) {
 		}
 	}
 }
-public void mostrarPartesArmadura(final int columnaTipo, final int columnaNombre, final int columnaPrecio, 
-final int columnaVidaAgregada, final int columnaVelocidadCambio) {
+public void mostrarPartesArmadura() {
 	System.out.println("Tienda de partes de armaduras");
 	for(int i = 0; i < elementosArmadura.length; i++) {
-	System.out.println("Numero: " + (i + 1) + " .Tipo: " + elementosArmadura[i][columnaTipo] + " .Nombre: " + elementosArmadura[i][columnaNombre] + 
-	" .Precio: " + elementosArmadura[i][columnaPrecio] + " .Plus de Vida  " + elementosArmadura[i][columnaVidaAgregada] +" .Plus de Velocidad: " + elementosArmadura[i][columnaVelocidadCambio]);
+	System.out.println("Numero: " + (i + 1) + " .Tipo: " + elementosArmadura[i][columnaTipoArmadura] + " .Nombre: " + elementosArmadura[i][columnaNombreArmadura] + 
+	" .Precio: " + elementosArmadura[i][columnaPrecioArmadura] + " .Plus de Vida  " + elementosArmadura[i][columnaVidaAgregada] +" .Plus de Velocidad: " + elementosArmadura[i][columnaVelocidadCambioArmadura]);
 	System.out.println();
 	}
 }
-public void mostrarArmas(final int columnaNombre,final int columnaDanio,final int columnaPrecio,
-		final int columnaVelocidadCambio) {
+public void mostrarArmas() {
 	System.out.println("Tienda de armas");
 	for(int i = 0; i < armas.length; i++) {
-	System.out.println("Numero: " + (i + 1) + " .Nombre: " + armas[i][columnaNombre]
-	+ " .Danio: " +  armas[i][columnaDanio] + " .Precio: " + armas[i][columnaPrecio] + " .Plus de Velocidad: " + armas[i][columnaVelocidadCambio]);
+	System.out.println("Numero: " + (i + 1) + " .Nombre: " + armas[i][columnaNombreArma]
+	+ " .Danio: " +  armas[i][columnaDanio] + " .Precio: " + armas[i][columnaPrecioArma] + " .Plus de Velocidad: " + armas[i][columnaVelocidadCambioArma]);
 	System.out.println();
 	}
 }
 public void asignarParteAleatoria(String tipoElemento, Jugador enemigo) {
-	final int columnaTipo= 0;
-	final int columnaNombre = 1;
-	final int columnaPrecio = 2;
-	final int columnaVidaAgregada = 3;
-	final int columnaVelocidadCambio = 4;
 	String [][]parteArmadura = obtenerPartesAleatorias(tipoElemento);
 	Random r = new Random();
 	int elementoRandom = r.nextInt(parteArmadura.length);
-	Armadura armadura = new Armadura(parteArmadura[elementoRandom][columnaNombre], parteArmadura[elementoRandom][columnaTipo], 
-	Integer.valueOf(parteArmadura[elementoRandom][columnaPrecio]), Integer.valueOf(parteArmadura[elementoRandom][columnaVidaAgregada]),  
-	Integer.valueOf(parteArmadura[elementoRandom][columnaVelocidadCambio]));
+	Armadura armadura = new Armadura(parteArmadura[elementoRandom][columnaNombreArmadura], parteArmadura[elementoRandom][columnaTipoArmadura], 
+	Integer.valueOf(parteArmadura[elementoRandom][columnaPrecioArmadura]), Integer.valueOf(parteArmadura[elementoRandom][columnaVidaAgregada]),  
+	Integer.valueOf(parteArmadura[elementoRandom][columnaVelocidadCambioArmadura]));
 	enemigo.adquirirArmadura(armadura);
 	
 }
@@ -189,7 +181,7 @@ private String[][] obtenerPartesAleatorias(String tipoElemento) {
 	String [][] partesArmaduraAux = new String[elementosArmadura.length][tiposPartesTotales];
 	int i = 0;
 	while(i < elementosArmadura.length) {
-		if(elementosArmadura[i][columnaTipo].equals(tipoElemento)) {
+		if(elementosArmadura[i][columnaTipoArmadura].equals(tipoElemento)) {
 			partesArmaduraAux[cantPartes] = elementosArmadura[i];
 			cantPartes++;
 		}
@@ -202,5 +194,13 @@ private String[][] obtenerPartesAleatorias(String tipoElemento) {
 		j++;
 	}
 	return partesArmadura;
+}
+public void asignarArmaAleatoeria(Jugador enemigo) {
+	Random r = new Random();
+	int elementoRandom = r.nextInt(armas.length);
+	Arma arma = new Arma(armas[elementoRandom][columnaNombreArma], Integer.valueOf(armas[elementoRandom][columnaDanio]), 
+			Integer.valueOf(armas[elementoRandom][columnaVelocidadCambioArma]), Integer.valueOf(armas[elementoRandom][columnaPrecioArma]));
+			enemigo.obtenerArma(arma);
+			
 }
 }
