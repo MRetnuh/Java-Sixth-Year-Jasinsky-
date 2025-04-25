@@ -5,8 +5,9 @@ import java.util.Random;
 public class generadorEnemigos {
 	Tienda tienda = new Tienda();
 	Jugador enemigo;
-	final String[] nombres = {"Raul", "Juan", "Pedro", "Luis", "Carlos", "Javier", "Andres", "Diego", "Fernando", "Pablo", "Roman"};
-	 final String[] elementos = {"Casco", "Peto", "Grebas", "Botas"};
+	NombresEnemigos enemigoNombre;
+	NombresEnemigos[] nombresDisponibles = NombresEnemigos.values();
+	final String[] elementos = {"Casco", "Peto", "Grebas", "Botas"};
 	public Jugador crearEnemigo() {
 	    enemigo = generarNombreEnemigo();
 		System.out.println("El nombre del enemigo es " + enemigo.getNombre());
@@ -28,7 +29,8 @@ public class generadorEnemigos {
 	    }
  private Jugador generarNombreEnemigo() {
 	 Random r = new Random();
-     String nombreElegido = nombres[r.nextInt(nombres.length)];
+	 int seleccionNombre = r.nextInt(nombresDisponibles.length);
+     String nombreElegido = String.valueOf(nombresDisponibles[seleccionNombre]);
 	 return new Jugador(nombreElegido);
  }
 }

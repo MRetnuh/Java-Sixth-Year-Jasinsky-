@@ -96,6 +96,7 @@ public void realizarPelea(Jugador jugador, Jugador enemigo, int primerTurno) {
                 if (enemigo.vida <= 0) {
                     System.out.println(enemigo.nombre + " ha sido derrotado. ¡" + jugador.nombre + " ha ganado!");
                     partidaTerminada = true;
+                    diferenciaVelocidad = 0;
                 }
             }
             
@@ -114,6 +115,7 @@ public void realizarPelea(Jugador jugador, Jugador enemigo, int primerTurno) {
                 if (jugador.vida <= 0) {
                     System.out.println(jugador.nombre + " ha sido derrotado. ¡" + enemigo.nombre + " ha ganado!");
                     partidaTerminada = true;
+                    diferenciaVelocidad = 0;
                 }
             }
             if (jugador.vida > 0) {
