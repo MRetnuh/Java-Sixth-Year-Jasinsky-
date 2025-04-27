@@ -3,6 +3,8 @@ package Utilidades;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import Entidades.Ciudad;
+
 public class Utiles {
 public static Scanner s = new Scanner(System.in);
 public static int ingresarEntero(final int numeroMin, final int numeroMax) {

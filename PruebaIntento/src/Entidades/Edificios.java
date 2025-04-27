@@ -1,3 +1,4 @@
+
 package Entidades;
 
 public class Edificios {
@@ -18,4 +19,20 @@ public Edificios(String nombre, String tipo, int seguridad, int prevIncendios, i
 public String getTipo() {
 	return this.tipo;
 }
+public String getNombre() {
+	return this.nombre;
+}
+public int getSeguridad() {
+	return this.seguridad;
+}
+public int getprevIncendios() {
+	return this.prevIncendios;
+}
+public int getFelicidad() {
+	return this.felicidad;
+}
+public int getPrecio() {
+	return this.precio;
+}
+
 }

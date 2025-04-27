@@ -11,4 +11,7 @@ public Alcalde(String nombre, String apellido) {
 public int getDinero() {
 	return this.dinero;
 }
+public String getNombre() {
+	return this.nombre;
+}
 }

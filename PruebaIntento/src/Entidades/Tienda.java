@@ -73,12 +73,14 @@ public void comprar(Ciudad ciudad) {
 	comprobador = ciudad.comprobadorEdificio(edificios[opcion - 1][tipoColumna]);
 	if(Integer.valueOf(edificios[opcion - 1][precioColumna]) > ciudad.getAlcaldeDinero()) {
 		System.out.println("No posee la plata suficiente");
+		return;
 	}
-	if(comprobador) {
+	else if(comprobador) {
 		System.out.println("Usted ya compro un edificio de ese tipo");
+		return;
 	}
-	else {
-		Edificios edificioComprado = new Edificios(edificios[opcion - 1][tipoColumna], edificios[opcion - 1][nombreColumna]
+	if(!comprobador) {
+		Edificios edificioComprado = new Edificios(edificios[opcion - 1][nombreColumna], edificios[opcion - 1][tipoColumna]
 		, Integer.valueOf(edificios[opcion - 1][seguridadColumna]), Integer.valueOf(edificios[opcion - 1][prevIncendiosColumna]),  
 		Integer.valueOf(edificios[opcion - 1][felicidadColumna]), Integer.valueOf(edificios[opcion - 1][precioColumna]));
 		System.out.println("Acaba de adquirir el edificio:");
@@ -91,7 +93,7 @@ public void comprar(Ciudad ciudad) {
 }
 public void mostrarEdificios() {
 	for(int i = 0; i < edificios.length; i++) {
-		System.out.println(i + ") " + "Nombre: " + edificios[i][nombreColumna] + " Tipo: " + edificios[i][tipoColumna] + " Seguridad: " + edificios[i][seguridadColumna]
+		System.out.println((i + 1) + ") " + "Nombre: " + edificios[i][nombreColumna] + " Tipo: " + edificios[i][tipoColumna] + " Seguridad: " + edificios[i][seguridadColumna]
 	+ " PrevIncendios: " + edificios[i][prevIncendiosColumna] + " Felicidad: "+ edificios[i][felicidadColumna] + " Precio: " + edificios[i][precioColumna]);
 	
 	}
