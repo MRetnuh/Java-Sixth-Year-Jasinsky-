@@ -1,0 +1,128 @@
+import java.util.InputMismatchException;
+import java.util.Scanner;
+
+public class PrimerEjercicio {
+	  public static void main(String[] args) {
+		  final int filas = 10;
+		  final int columnas = 6;
+		   int[][] avion = new int[filas][columnas];
+		  avion = inicializarMatriz(avion, filas, columnas);
+		  mostrarMenu();
+		  Scanner s = new Scanner(System.in);
+		  int n = 0;
+		  int asientoColumna = 0;
+		  boolean error = false;
+		  do {
+			  try {
+			  error = false;
+			  n = s.nextInt();
+			  if(n > 3 || n < 0) {
+				  System.out.println("Ingrese un numero valido");
+				  error = true;
+			  }
+			  } catch(InputMismatchException e){
+				  System.out.println("Ingrese un numero");
+				  error = true;
+			  }
+			  catch(Exception e){
+				  System.out.println("Error");
+				  error = true;
+			  }
+			  finally {
+					s.nextLine();
+				}
+			  
+		  }while(error);
+		generarAccion(avion, filas, columnas, n);
+		
+	  }
+		  
+	  
+	  public static int[][] inicializarMatriz(final int[][] avion, final int filas, final int columnas) {
+		final int ocupado = 1;
+		final int desocupado = 2;
+		for(int i = 0; i < filas; i++) {
+			for(int j = 0; j < columnas; j++) {
+				avion[i][j] = desocupado;
+			}
+		}
+		  return avion;
+	  }
+	  public static void imprimirMatriz(final int[][] avion, final int filas, final int columnas) {
+		  System.out.println("  1 2 3  4 5 6  ");
+		  for(int i = 0; i < filas; i++) {
+			  char fila = (char) ('A' + i);
+			  System.out.print(fila + " ");
+			  for(int j = 0; j < columnas; j++) {
+				  if(avion[i][j] == 2) {
+					    System.out.print("- ");
+				  }
+				  if(j == 2) {
+					  System.out.print(" ");  
+				  }
+				  else if(avion[i][j] == 1){
+					  System.out.print("x ");
+				  }
+				
+			  }
+			  System.out.println(fila);
+		  }
+	  }
+	  public static void mostrarMenu() {
+		  System.out.println("Ingrese de acuerdo al numero la accion que quiera realizar: ");
+		  System.out.println("1) mostrar asientos");
+		  System.out.println("2) reservar asiento");
+		  System.out.println("3) cancelar reserva ");
+		  
+	  }
+  public static void generarAccion(final int[][] avion, final int filas, final int columnas, int n) {
+		  if(n == 1) {
+			  imprimirMatriz(avion, filas, columnas);
+		  }
+		  if(n == 2) {
+			  imprimirMatriz(avion, filas, columnas);
+		  }
+	  }
+	  public static void reservarAsiento(int asientoColumna, String asientoFila, Scanner s) {
+		  boolean error = false;
+		  boolean error2 = false;
+		  System.out.println("Elija que asiento reservar. Ingrese primero la columna");
+		  do {
+			  try {
+			  error = false;
+			  if(asientoColumna > 6 || asientoColumna < 0) {
+				  System.out.println("Ingrese un numero valido");
+				  error = true;
+			  }
+			  } catch(InputMismatchException e){
+				  System.out.println("Ingrese un numero");
+				  error = true;
+			  }
+			  catch(Exception e){
+				  System.out.println("Error");
+				  error = true;
+			  }
+			  finally {
+				  s.nextLine();
+				}
+			  
+		  }while(error);
+		  System.out.println("Ahora ingrese la fila");
+		  do {
+			  try {
+			  error2 = false;
+			  } catch(InputMismatchException e){
+				  System.out.println("Ingrese una letra");
+				  error2 = true;
+			  }
+			  catch(Exception e){
+				  System.out.println("Error");
+				  error2 = true;
+			  }
+			  finally {
+				  s.nextLine();
+				}
+			  
+		  }while(error2);
+	  }
+}
