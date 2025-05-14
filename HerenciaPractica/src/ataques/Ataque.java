@@ -1,7 +1,7 @@
 package ataques;
 
 import pokemons.Tipos;
-
+//usa private en vez de protected las clases hijo no tendran hijos. De este modo, puede usar una funcion constructor
 public abstract class Ataque {
 
     private String nombre;

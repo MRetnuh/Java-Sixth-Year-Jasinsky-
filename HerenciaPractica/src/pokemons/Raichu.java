@@ -1,7 +1,7 @@
 package pokemons;
 
 import ataques.ImpactoTrueno;
-
+//final para evitar que esta clase sea padre de otra. evitar un extend con esta clase en resumen
 public final class Raichu extends Pikachu {
 private ImpactoTrueno a2;
    public Raichu() {
