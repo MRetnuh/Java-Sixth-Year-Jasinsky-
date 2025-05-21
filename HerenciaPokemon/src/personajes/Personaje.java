@@ -14,10 +14,10 @@ public abstract class Personaje {
         return this.nombre;
     }
     public boolean comprobarDerrota() {
-        if(pokemonesDerrotados == 3) {
-        	derrota = true;
+        if(this.pokemonesDerrotados == 3) {
+        	this.derrota = true;
         }
-        return derrota;
+        return this.derrota;
     }
    
 }
