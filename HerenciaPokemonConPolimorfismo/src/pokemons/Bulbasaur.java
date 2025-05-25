@@ -10,7 +10,7 @@ public class Bulbasaur extends PokemonBase {
 private Ataque placaje, grunido, latigoCepa, polvoVenenoso;
 
     public Bulbasaur(){
-        super("Bulbasaur", TipoPokemon.PLANTA, 850);
+        super("Bulbasaur", 850);
         this.placaje = new Placaje();
         this.grunido = new Grunido();
         this.latigoCepa = new LatigoCepa();
@@ -19,6 +19,8 @@ private Ataque placaje, grunido, latigoCepa, polvoVenenoso;
         super.ataques.add(grunido);
         super.ataques.add(latigoCepa);
         super.ataques.add(polvoVenenoso);
+        super.tipoPokemon.add(TipoPokemon.PLANTA);
+        super.tipoPokemon.add(TipoPokemon.VENENO);
 
 }
 }

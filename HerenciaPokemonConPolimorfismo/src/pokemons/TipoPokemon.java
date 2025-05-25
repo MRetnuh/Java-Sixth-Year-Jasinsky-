@@ -11,11 +11,12 @@ public enum TipoPokemon {
     NINGUNO;
 
     private TipoPokemon efectivoContra;
-    private TipoPokemon pocoEfectivoContra;
-
+   public TipoPokemon getTipoPokemonVentaja() {
+	   return this.efectivoContra;
+   }
     static {
         AGUA.efectivoContra = FUEGO;
-        FUEGO.efectivoContra = AGUA;
+        FUEGO.efectivoContra = PLANTA;
         PLANTA.efectivoContra = AGUA;
         ELECTRICO.efectivoContra = VENENO;
         VENENO.efectivoContra = NORMAL;

@@ -10,7 +10,7 @@ public class Pikachu extends PokemonBase {
 private Ataque latigo, impactrueno, grunido, ondaTrueno;
 
     public Pikachu(){
-        super("Pikachu", TipoPokemon.ELECTRICO, 770);
+        super("Pikachu", 770);
         this.latigo = new Latigo();
         this.impactrueno = new Impactrueno();
         this.grunido = new Grunido();
@@ -19,6 +19,7 @@ private Ataque latigo, impactrueno, grunido, ondaTrueno;
         super.ataques.add(impactrueno);
         super.ataques.add(grunido);
         super.ataques.add(ondaTrueno);
+        super.tipoPokemon.add(TipoPokemon.ELECTRICO);
     }
 
 }

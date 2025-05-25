@@ -7,11 +7,12 @@ import ataques.Fortaleza;
 public class Charmander extends PokemonBase {
 private Ataque ascuas, fortaleza;
     public Charmander() {
-        super("Charmander", TipoPokemon.FUEGO, 750);
+        super("Charmander", 750);
         this.ascuas = new Ascuas();
         this.fortaleza = new Fortaleza();
         super.ataques.add(ascuas);
         super.ataques.add(fortaleza);
+        super.tipoPokemon.add(TipoPokemon.FUEGO);
     }
 
 }

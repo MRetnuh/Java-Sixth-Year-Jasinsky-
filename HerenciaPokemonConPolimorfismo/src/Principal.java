@@ -51,14 +51,17 @@ private static Enemigo enemigo;
     			 jugador.elegirPokemon();
     			 jugador.infligirDanio(enemigo);
     			 turno = 1;
+                 finPelea = enemigo.comprobarDerrota();
     		 }else {
     			 enemigo.mostrarEquipo();
     			 System.out.println("El jugador " + enemigo.getNombre() + " eligio a: ");
     			 enemigo.mostrarNombrePokemonElegido();
     			 enemigo.infligirDanio(jugador);
     			 turno = 0;
+                 finPelea = jugador.comprobarDerrota();
     		 }
     	 }while(!finPelea);
+    	 System.out.println("El jugador " + (jugador.comprobarDerrota() == false? jugador.getNombre() : enemigo.getNombre() + " ha ganado la pelea"));
     }
 
     private static void mostrarPokemones() {
