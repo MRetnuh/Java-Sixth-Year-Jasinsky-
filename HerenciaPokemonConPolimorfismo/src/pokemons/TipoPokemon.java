@@ -9,8 +9,8 @@ public enum TipoPokemon {
     NORMAL,
     NINGUNO;
 
-	  private TipoPokemon[] superEfectivoContra = new TipoPokemon[0];
-	    private TipoPokemon[] pocoEfectivoContra = new TipoPokemon[0];
+	    private TipoPokemon[] superEfectivoContra;
+	    private TipoPokemon[] pocoEfectivoContra;
 
     static {
         ELECTRICO.superEfectivoContra = new TipoPokemon[] {AGUA};
@@ -27,6 +27,9 @@ public enum TipoPokemon {
 
         VENENO.superEfectivoContra = new TipoPokemon[] {PLANTA};
         VENENO.pocoEfectivoContra = new TipoPokemon[] {VENENO};
+        
+        NORMAL.superEfectivoContra = new TipoPokemon[] {NINGUNO}; 
+        NORMAL.pocoEfectivoContra = new TipoPokemon[] {NINGUNO}; 
     }
 
     public float obtenerRatioEfectidad(TipoPokemon tipo) {

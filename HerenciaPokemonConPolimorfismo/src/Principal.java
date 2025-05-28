@@ -14,7 +14,7 @@ public class Principal {
         jugadores[JUGADOR].mostrarEquipo();
         jugadores[ENEMIGO].mostrarEquipo();
         batallar();
-
+       Utiles.s.close();
 
     }
 	private static void elegirPokemones() {
@@ -39,20 +39,19 @@ public class Principal {
     	 System.out.println("La pelea va a comenzar");
     	 boolean finPelea = false;
     	 int turno =  Utiles.r.nextInt(2);
-    	 jugadores[ENEMIGO].elegirPokemon();
     	 System.out.println("Empieza el jugador " + jugadores[turno].getNombre());
-    	 do {
+    	 do {    
     		     jugadores[turno].mostrarEquipo();
     			 System.out.println("Pokemon de " + jugadores[cambiarTurno(turno)].getNombre() + ": ");
     			 jugadores[cambiarTurno(turno)].mostrarNombrePokemonElegido();
-    			 if(jugadores[turno] == jugadores[JUGADOR]) {
-                    jugadores[turno].elegirPokemon();
-    			 }
+    			 System.out.println();
+    			 jugadores[turno].mostrarNombrePokemonElegido();
     			 jugadores[turno].efectuarAtaque(jugadores[cambiarTurno(turno)].getPokemonElegido());
-                 finPelea = jugadores[turno].comprobarDerrota();
+    			 jugadores[cambiarTurno(turno)].perderPokemon();
+    			 finPelea = jugadores[cambiarTurno(turno)].comprobarDerrota();
     			 turno = cambiarTurno(turno);
     	 }while(!finPelea);
-    	 System.out.println("El jugador " + (jugadores[JUGADOR].comprobarDerrota() == false? jugadores[JUGADOR].getNombre() : jugadores[ENEMIGO].getNombre() + " ha ganado la pelea"));
+    	 System.out.println("El jugador " + (jugadores[JUGADOR].comprobarDerrota() == false? jugadores[JUGADOR].getNombre() : jugadores[ENEMIGO].getNombre()) + " ha ganado la pelea");
     }
     
     

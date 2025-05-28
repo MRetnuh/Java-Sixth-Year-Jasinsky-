@@ -7,13 +7,6 @@ public class Enemigo extends Entrenador {
         super("Gary Oak");
     }
     @Override
-    public void elegirPokemon() {
-      this.pokemonElegido = Utiles.r.nextInt(this.pokemones.length);
-        }
-    public void mostrarNombrePokemonElegido() {
-    	this.pokemones[this.pokemonElegido].mostrarDatos();
-    }
-    @Override
     public int elegirAtaque() {
     int opcAtaque = Utiles.r.nextInt(this.pokemones[this.pokemonElegido].getCantAtaques());
     return opcAtaque;

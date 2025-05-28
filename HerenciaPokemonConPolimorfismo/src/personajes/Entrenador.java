@@ -9,26 +9,16 @@ public abstract class Entrenador {
 	private String nombre;
     private final int CANTMAXPOKEMONES = 3;
     protected PokemonBase[] pokemones = new PokemonBase[3];
-    protected PokemonBase[] pokemonesRestantes = new PokemonBase[3];
     private int pokemonesElegidos = 0;
+    private int pokemonesDerrotados = 0;
     private boolean derrota = false;
     protected int pokemonElegido = 0;
     public Entrenador(String nombre) {
         this.nombre = nombre;
     }
     
-    public void elegirPokemon() {
-        System.out.println("Elija su pokemon para atacar");
-        for(int i = 0; i < this.pokemones.length; i++) {
-        	this.pokemones[i].mostrarDatos();
-        }
-         this.pokemonElegido = Utiles.ingresarEntero(1, this.pokemones.length) - 1;
-         this.pokemones[pokemonElegido].getNombre();
-        }
-    
     public void asignarPokemon(PokemonBase pokemon) {
         this.pokemones[pokemonesElegidos] = pokemon;
-        this.pokemonesRestantes[pokemonesElegidos] = pokemon;
         this.pokemonesElegidos++;
     }
 
@@ -82,15 +72,18 @@ public abstract class Entrenador {
         return this.CANTMAXPOKEMONES;
     }
     public boolean comprobarDerrota() {
-        if(this.pokemones.length <= 0) {
+        if(this.pokemonesDerrotados == 3) {
         	this.derrota = true;
         }
         return this.derrota;
     }
-    public void perderPokemon(int opcPokemon) {
-    	if(this.pokemones[opcPokemon].getVida() <= 0) {
-    	 System.out.println("El pokemon " + this.pokemones[opcPokemon].getNombre() + " ha sido culeado");
-    	 this.pokemonElegido = 0;
+    public void perderPokemon() {
+    	if(this.pokemones[this.pokemonElegido].getVida() <= 0) {
+    	 System.out.println("El pokemon " + this.pokemones[pokemonElegido].getNombre() + " ha sido culeado");
+    	 if(this.pokemonElegido <= this.CANTMAXPOKEMONES - 1) {
+    	 this.pokemonElegido++;
+    	 }
+    	 this.pokemonesDerrotados++;
     	}
     	 
     }

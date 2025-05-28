@@ -105,18 +105,16 @@ public abstract class PokemonBase {
 		else {
 			float danio = this.ataques[opcAtaque].getDanio();
 			 for(int i = 0; i < pokemonOponente.tipoPokemon.length; i++) {
-			  multiplicador = this.ataques[opcAtaque].getTipo().obtenerRatioEfectidad(pokemonOponente.getTipo(i));
-	            danio *= multiplicador;
-	            if(multiplicador==2){
-	                System.out.println("El ataque es super efectivo");
-	                i = pokemonOponente.tipoPokemon.length;
-	            } else if(multiplicador==0.5f){
-	                System.out.println("El ataque es poco efectivo");
-	               i = pokemonOponente.tipoPokemon.length;
-	            }
+			  multiplicador *= this.ataques[opcAtaque].getTipo().obtenerRatioEfectidad(pokemonOponente.getTipo(i));
 			 }
+			 danio *= multiplicador;
+			   if(multiplicador>=2){
+	                System.out.println("El ataque es super efectivo");
+	            } else if(multiplicador<1f){
+	                System.out.println("El ataque es poco efectivo");
+	            }
 	            pokemonOponente.quitarVida((int)danio);
-
+                
 	            System.out.println(this.nombre + " ha usado " + this.ataques[opcAtaque].getNombre() + " y ha causado " + danio + " puntos de daño");
 		}
 	}
