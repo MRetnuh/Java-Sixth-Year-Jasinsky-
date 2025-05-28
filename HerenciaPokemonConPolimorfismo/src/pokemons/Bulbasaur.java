@@ -1,26 +1,17 @@
 package pokemons;
 
+import ataques.Araniazo;
+import ataques.Ascuas;
 import ataques.Ataque;
 import ataques.Grunido;
 import ataques.LatigoCepa;
+import ataques.PantallaDeHumo;
 import ataques.Placaje;
 import ataques.PolvoVenenoso;
 
 public class Bulbasaur extends PokemonBase {
-private Ataque placaje, grunido, latigoCepa, polvoVenenoso;
 
     public Bulbasaur(){
-        super("Bulbasaur", 850);
-        this.placaje = new Placaje();
-        this.grunido = new Grunido();
-        this.latigoCepa = new LatigoCepa();
-        this.polvoVenenoso = new PolvoVenenoso();
-        super.ataques.add(placaje);
-        super.ataques.add(grunido);
-        super.ataques.add(latigoCepa);
-        super.ataques.add(polvoVenenoso);
-        super.tipoPokemon.add(TipoPokemon.PLANTA);
-        super.tipoPokemon.add(TipoPokemon.VENENO);
-
+    	 super("Bulbasaur", new TipoPokemon[] {TipoPokemon.PLANTA, TipoPokemon.VENENO}, 850, new Ataque[] {new Placaje(), new Grunido(), new LatigoCepa(), new PolvoVenenoso()});
 }
 }

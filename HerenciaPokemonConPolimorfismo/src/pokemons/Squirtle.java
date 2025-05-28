@@ -2,20 +2,14 @@ package pokemons;
 
 import ataques.Ataque;
 import ataques.Burbuja;
+import ataques.Latigo;
 import ataques.PistolaDeAgua;
+import ataques.Placaje;
 import ataques.RayoBurbuja;
 
 public class Squirtle extends PokemonBase {
-private Ataque pistolaDeAgua, rayoBurbuja, burbuja;
-    public Squirtle() {
-        super("Squirtle",720);
-        this.pistolaDeAgua = new PistolaDeAgua();
-        this.rayoBurbuja = new RayoBurbuja();
-        this.burbuja = new Burbuja();
-        super.ataques.add(pistolaDeAgua);
-        super.ataques.add(rayoBurbuja);
-        super.ataques.add(burbuja);
-        super.tipoPokemon.add( TipoPokemon.AGUA);
+    public Squirtle() {  
+    	super("Squirtle", new TipoPokemon[] {TipoPokemon.AGUA}, 720, new Ataque[]{new Placaje(), new Latigo(), new Burbuja(), new PistolaDeAgua()});
     }
 
 }

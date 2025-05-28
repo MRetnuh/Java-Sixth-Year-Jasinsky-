@@ -37,7 +37,9 @@ public abstract class Ataque {
     public int getCantUsos() {
         return this.cantUsos;
     }
-
+    public TipoPokemon getTipo() {
+    	return this.tipo;
+    }
     public void usarAtaque() {
         this.cantUsos--;
     }

@@ -1,18 +1,15 @@
 package pokemons;
 
+import ataques.Araniazo;
 import ataques.Ascuas;
 import ataques.Ataque;
 import ataques.Fortaleza;
+import ataques.Grunido;
+import ataques.PantallaDeHumo;
 
 public class Charmander extends PokemonBase {
-private Ataque ascuas, fortaleza;
     public Charmander() {
-        super("Charmander", 750);
-        this.ascuas = new Ascuas();
-        this.fortaleza = new Fortaleza();
-        super.ataques.add(ascuas);
-        super.ataques.add(fortaleza);
-        super.tipoPokemon.add(TipoPokemon.FUEGO);
+    	 super("Charmander", new TipoPokemon[] {TipoPokemon.FUEGO}, 750, new Ataque[] {new Araniazo(), new Grunido(), new Ascuas(), new PantallaDeHumo()});
     }
 
 }

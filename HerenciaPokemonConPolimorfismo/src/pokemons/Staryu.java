@@ -2,17 +2,15 @@ package pokemons;
 
 import ataques.Ataque;
 import ataques.Constriccion;
+import ataques.Fortaleza;
 import ataques.Latigo;
+import ataques.PistolaDeAgua;
+import ataques.Placaje;
+import ataques.RayoBurbuja;
 
 public class Staryu extends PokemonBase {
-private Ataque latigo, constriccion;
     public Staryu(){
-        super("Staryu", 650);
-        this.latigo = new Latigo();
-        this.constriccion = new Constriccion();
-        super.ataques.add(latigo);
-        super.ataques.add(constriccion);
-        super.tipoPokemon.add(TipoPokemon.NORMAL);
+    	  super("Staryu", new TipoPokemon[] {TipoPokemon.AGUA} ,650, new Ataque[] {new Placaje(), new Fortaleza(), new PistolaDeAgua(), new RayoBurbuja()});
     }
 
 }
