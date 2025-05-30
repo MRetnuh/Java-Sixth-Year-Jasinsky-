@@ -7,7 +7,7 @@ public class ZonaCaptura {
 	private final int TIPOCOLUMNA = 1;
 	private final int NIVELCOLUMNA = 2;
 	private final int COSTOCOLUMNA = 3;
-	final int OPCIONMINIMA = 1;
+	private final int OPCIONMINIMA = 1;
 	  private final String[][] POKEMONES_DISPONIBLES = {
 			  {"Pikachu", "ELÉCTRICO", "15", "1000"}, 
 			  {"Charmander", "FUEGO", "16", "1200"}, 
