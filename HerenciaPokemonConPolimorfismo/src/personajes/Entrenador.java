@@ -50,10 +50,6 @@ public abstract class Entrenador {
     	cantUsos =  this.pokemones[pokemonElegido].getCantUsosAtaqueElegido(opcAtaque);
     	if(cantUsos != 0) {
         this.pokemones[this.pokemonElegido].reducirCantAtaqueElegido(opcAtaque);
-    	int ataqueErrado = Utiles.r.nextInt(100) + 1;
-    	if(ataqueErrado >  this.pokemones[pokemonElegido].getPrecisionAtaque(opcAtaque)) {
-    		  opcAtaque = -1;
-    	}
     	}
     	else {
     		tieneAtaques = this.pokemones[this.pokemonElegido].verificarUsosAtaques();

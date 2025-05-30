@@ -1,5 +1,9 @@
 package pokemons;
 import ataques.Ataque;
+import efectos.EfectoSecundario;
+import estados.EstadoAlterado;
+import estados.EstadoEstadisticaModificada;
+import utilidades.Utiles;
 
 public abstract class PokemonBase {
 
@@ -15,7 +19,13 @@ public abstract class PokemonBase {
         this.tipoPokemon = tipoPokemon;
         this.ataques = ataques;
     }
-
+    
+    private EstadoAlterado estadoAlterado;
+    
+    public void aplicarEstadoAlterado(EstadoAlterado estadoAlterado) {
+		this.estadoAlterado = estadoAlterado;
+		
+	}
     public void quitarVida(int danio) {
         this.vida -= danio;
     }
@@ -98,14 +108,39 @@ public abstract class PokemonBase {
     }
 
 	public void atacar(int opcAtaque, PokemonBase pokemonOponente) {
-		float multiplicador = 1f;
-		if(opcAtaque == -1) {
-			  System.out.println("El pokemon " + this.nombre + " fallo el ataque");
+		
+		int porcentajeReduccionAtaque = 0;
+		int porcentajeReduccionDefensa = 0;
+		int porcentajeReduccionPrecision = 0;
+		
+		if(estadoAlterado != null) {
+		if(this.estadoAlterado instanceof EstadoEstadisticaModificada) {//esto sirve para saber si el valor guardado en estadoAlterado es de tipo EstadoEstadisModifc. Ademas, lo de abajo va a funcionar porque compruebo con este if de que el estado sea de estadoestadisticamodikfcada
+			EstadoEstadisticaModificada estado = (EstadoEstadisticaModificada) this.estadoAlterado; //con esto transformo la (variable) clase padre a clasehija, teniendo acceso a sus recursos aun como padre
+		    switch(estado.getTipoEstadistica()) {
+		    case ATAQUE:
+		    	porcentajeReduccionAtaque = estado.getPorcentaje();
+		    	break;
+		    case DEFENSA:
+		    	porcentajeReduccionDefensa = estado.getPorcentaje();
+		    	break;
+		    case PRECISION:
+		    	porcentajeReduccionPrecision = estado.getPorcentaje();
+		    	break;
+		    }
+		    estado.mostrarInformacion();
 		}
+		}
+		float multiplicador = 1f;
+		Ataque ataque = this.ataques[opcAtaque];
+		int ataqueErrado = Utiles.r.nextInt(100) + 1;
+		if(ataqueErrado >  ataque.getPrecision()) {
+			  System.out.println("El pokemon " + this.nombre + " fallo el ataque");
+  	}
 		else {
-			float danio = this.ataques[opcAtaque].getDanio();
+			float danio = ataque.getDanio() - (ataque.getDanio() * porcentajeReduccionAtaque / 100f);
+			if(danio > 0) {
 			 for(int i = 0; i < pokemonOponente.tipoPokemon.length; i++) {
-			  multiplicador *= this.ataques[opcAtaque].getTipo().obtenerRatioEfectidad(pokemonOponente.getTipo(i));
+			  multiplicador *= ataque.getTipo().obtenerRatioEfectidad(pokemonOponente.getTipo(i));
 			 }
 			 danio *= multiplicador;
 			   if(multiplicador>=2){
@@ -115,7 +150,22 @@ public abstract class PokemonBase {
 	            }
 	            pokemonOponente.quitarVida((int)danio);
                 
-	            System.out.println(this.nombre + " ha usado " + this.ataques[opcAtaque].getNombre() + " y ha causado " + danio + " puntos de daño");
+	            System.out.println(this.nombre + " ha usado " + ataque.getNombre() + " y ha causado " + danio + " puntos de daño");
+		}
+			 if(this.estadoAlterado != null) {
+			this.estadoAlterado.reducirTurno();
+			if(this.estadoAlterado.getTurnos() == 0) {
+				System.out.println(this.nombre + " ha recuperado su estado normal");
+				this.estadoAlterado = null;
+			}
+			 }
+			EfectoSecundario efectoSecundario = ataque.getEfectoSecundario();
+			if(efectoSecundario != null) {
+				if(ataqueErrado < efectoSecundario.getProbabilidad()) {
+					efectoSecundario.aplicar(pokemonOponente);
+				}
+			}
 		}
 	}
+	
 }
