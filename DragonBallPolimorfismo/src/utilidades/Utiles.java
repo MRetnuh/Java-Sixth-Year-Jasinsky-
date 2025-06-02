@@ -4,7 +4,11 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Utiles {
+public final class Utiles {
+	
+ private Utiles() {
+	 
+ }
 public static Scanner s = new Scanner (System.in);
 public static Random r = new Random();
 public static int ingresarEntero(final int MIN, final int MAX) {

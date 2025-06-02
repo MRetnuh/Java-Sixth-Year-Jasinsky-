@@ -11,6 +11,7 @@ public Personaje(String nombre, int vida, int energia) {
 	this.vida = vida;
 	this.energia = energia;
 }
+
 public boolean comprobarDerrota(Personaje enemigo) {
 	if(enemigo.getVida() <= 0) {
 		return true;

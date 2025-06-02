@@ -12,6 +12,7 @@ private static final int JUGADOR = 0, ENEMIGO = 1;
 public static void main(String[] args) {
 	elegirPersonajesJugadorYEnemigo();
 	batallar();
+	Utiles.s.close();
 }
 
 private static void elegirPersonajesJugadorYEnemigo() {
@@ -57,6 +58,7 @@ private static int cambiarTurno(int turno) {
 }
 private static void mostrarGokuFases() {
 	System.out.println("Transformaciones de: " + PersonajesDisponibles.GOKU.getNombre());
+	
 	for(int i = 0; i < GokuFases.values().length; i++) {
 	System.out.println(GokuFases.values()[i].getNombre());
 	}
@@ -64,8 +66,11 @@ private static void mostrarGokuFases() {
 
 private static void mostrarFreezerTransformaciones() {
 	System.out.println("Transformaciones de: " + PersonajesDisponibles.FREEZER.getNombre());
+	
 	for(int i = 0; i < FreezerFormas.values().length; i++) {
+		
 		System.out.println( FreezerFormas.values()[i].getNombre());
+	
 	}
 }
 
