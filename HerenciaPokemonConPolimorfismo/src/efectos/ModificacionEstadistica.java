@@ -19,10 +19,8 @@ public class ModificacionEstadistica extends EfectoSecundario{
  }
  @Override
  public void aplicar(PokemonBase pokemonOponente) {//tiene los mismos argumentos/parametros que la funcion de padre
-	 int porcentaje = Utiles.r.nextInt(porcentajeMax - porcentajeMax +1) + porcentajeMin;
+	 int porcentaje = Utiles.r.nextInt(this.porcentajeMax - this.porcentajeMax +1) + porcentajeMin;
 	 int turnos = Utiles.r.nextInt(super.turnosMax - super.turnosMin + 1) + super.turnosMin;
 	 pokemonOponente.aplicarEstadoAlterado(new EstadoEstadisticaModificada(this.tipoEstadistica, porcentaje, turnos));
-	  System.out.println("Ahora " + pokemonOponente.getNombre() + " vera reducida su estadistica: "+ this.tipoEstadistica.getNombreEstadistica() + " en un " + porcentaje + 
-			  "% durante " + turnos + " turnos");
  }
 }

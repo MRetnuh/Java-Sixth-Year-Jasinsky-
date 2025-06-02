@@ -35,14 +35,14 @@ public enum TipoPokemon {
     public float obtenerRatioEfectidad(TipoPokemon tipo) {
         boolean esSuperEfectivo = verificarExistenciaTipo(tipo, this.superEfectivoContra);
         if(esSuperEfectivo){
-            return 2;
+            return 2f;
         }
 
         boolean esPocoEfectivo = verificarExistenciaTipo(tipo, this.pocoEfectivoContra);
         if(esPocoEfectivo){
             return 0.5f;
         }
-        return 1;
+        return 1f;
     }
 
     private boolean verificarExistenciaTipo(TipoPokemon tipo, TipoPokemon[] listadoTipos) {

@@ -5,7 +5,7 @@ import pokemons.*;
 import utilidades.Utiles;
 
 public class Principal {
-	private final static int JUGADOR =0, ENEMIGO=1;
+	private static final int JUGADOR =0, ENEMIGO=1;
 	   private static Entrenador[] jugadores = new Entrenador[2];
     public static void main(String[] args) {
     	crearJugadorYEnemigo();
@@ -40,17 +40,23 @@ public class Principal {
     	 boolean finPelea = false;
     	 int turno =  Utiles.r.nextInt(2);
     	 System.out.println("Empieza el jugador " + jugadores[turno].getNombre());
+    	 
+    	 
     	 do {    
     		     jugadores[turno].mostrarEquipo();
     			 System.out.println("Pokemon de " + jugadores[cambiarTurno(turno)].getNombre() + ": ");
     			 jugadores[cambiarTurno(turno)].mostrarNombrePokemonElegido();
+    			 
     			 System.out.println();
+    			 
     			 jugadores[turno].mostrarNombrePokemonElegido();
     			 jugadores[turno].efectuarAtaque(jugadores[cambiarTurno(turno)].getPokemonElegido());
     			 jugadores[cambiarTurno(turno)].perderPokemon();
     			 finPelea = jugadores[cambiarTurno(turno)].comprobarDerrota();
+    			 
     			 turno = cambiarTurno(turno);
     	 }while(!finPelea);
+    	 
     	 System.out.println("El jugador " + (jugadores[JUGADOR].comprobarDerrota() == false? jugadores[JUGADOR].getNombre() : jugadores[ENEMIGO].getNombre()) + " ha ganado la pelea");
     }
     
@@ -58,11 +64,13 @@ public class Principal {
     private static int cambiarTurno(int turno) {
         return (turno+1)%2;
     }
+    
     private static void mostrarPokemones() {
         for (int i = 0; i < Pokemon.values().length; i++) {
             System.out.println(i+1 + ". " + Pokemon.values()[i].getNombre());
         }
     }
+    
  private static void crearJugadorYEnemigo() {
 	   System.out.println("Bienvenido al mundo Pokemon");
        System.out.println("Ingrese su nombre");
@@ -70,9 +78,11 @@ public class Principal {
 
        jugadores[JUGADOR] = new Jugador(nombre);
        jugadores[ENEMIGO] = new Enemigo();
+       
    	System.out.println("Tu adversario sera " +  jugadores[ENEMIGO].getNombre());
  }
-    public static PokemonBase crearPokemon(int nroPokemon){
+ 
+    private static PokemonBase crearPokemon(int nroPokemon){
         PokemonBase pokemonElegido = new Pikachu();
         switch(nroPokemon) {
             case 1:

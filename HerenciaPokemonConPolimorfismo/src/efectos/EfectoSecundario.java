@@ -5,7 +5,6 @@ import pokemons.PokemonBase;
 public abstract class EfectoSecundario {
 protected int probabilidad;
 protected int turnosMin, turnosMax;
-public String nombre;
 
 public EfectoSecundario(int probabilidad, int turnosMin, int turnosMax) {
 	this.probabilidad = probabilidad;
@@ -20,7 +19,5 @@ public int getProbabilidad() {
 	return this.probabilidad;
 }
 
-public String getNombre(){
-	return this.nombre;
-}
+
 }
