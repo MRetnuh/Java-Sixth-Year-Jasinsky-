@@ -1,11 +1,11 @@
 package personajes;
 
 public enum PersonajesDisponibles {
-GOKU ("Goku"),
+GOKU ("Goku (base)"),
 GOKUSSJ ("Super Saiyajin"),
 GOKUSSJ2 ("Super Saiyajin 2"),
 GOKUSSJ3 ("Super Saiyajin 3"),
-FREEZER ("Freezer"),
+FREEZER ("Freezer (base)"),
 FREEZER1TRANSFORMACION ("primera transformacion"),
 FREEZER2TRANSFORMACION  ("segunda transformacion"),
 FREEZER3TRANSFORMACION  ("tercera transformacion");	

@@ -11,6 +11,11 @@ public final class Utiles {
  }
 public static Scanner s = new Scanner (System.in);
 public static Random r = new Random();
+
+public static int generarRandomEntreNumeros(final int MIN, final int MAX) {
+	return (MAX - MIN + 1) + MIN;
+}
+
 public static int ingresarEntero(final int MIN, final int MAX) {
 	int num = 0;
 	boolean error = false;

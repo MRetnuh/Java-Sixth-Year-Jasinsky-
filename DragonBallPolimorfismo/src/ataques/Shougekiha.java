@@ -1,5 +1,5 @@
 package ataques;
 
-public class Shougekiha {
+public class Shougekiha extends Ataques{
 
 }
