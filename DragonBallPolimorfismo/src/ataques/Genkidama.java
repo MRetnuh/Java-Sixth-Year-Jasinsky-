@@ -1,7 +1,8 @@
 package ataques;
 
 public class Genkidama extends Ataques{
-	public Kamehameha(){
-		super(250, 500, 501, 800, 0, 5, 80, 20, null);
+	
+	public Genkidama(){
+		super("Genkidama", 5000, 10000, 10001, 20000, 20001,50000,20000, 5, 80, 20,10);
 	}
 }

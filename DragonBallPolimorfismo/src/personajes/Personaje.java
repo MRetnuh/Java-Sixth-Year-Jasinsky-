@@ -1,11 +1,13 @@
 package personajes;
 
+import ataques.Ataques;
+
 public abstract class Personaje {
 	
 private String nombre;
 private int vida;
 private int energia;
-
+protected Ataques[] ataques = new Ataques[0];
 public Personaje(String nombre, int vida, int energia) {
 	this.nombre = nombre;
 	this.vida = vida;
@@ -19,6 +21,13 @@ public boolean comprobarDerrota(Personaje enemigo) {
 	else {
 		return false;
 	}
+}
+
+public void atacar(Personaje enemigo) {
+}
+
+public void elegirAtaque() {
+	
 }
 
 public String getNombre() {

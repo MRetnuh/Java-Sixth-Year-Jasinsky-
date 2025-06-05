@@ -7,15 +7,15 @@ import efectos.EfectoSecundario;
 public class Golpe extends Ataques {
 
     public Golpe(Personaje personaje) {
-        super(
-            personaje instanceof GokuBase ? 250 : 250,
-            personaje instanceof GokuBase ? 500 : 500,
-            personaje instanceof GokuBase ? 501 : 501,
-            personaje instanceof GokuBase ? 800 : 800,
-            personaje instanceof GokuBase ? 7000 : 7000,
-            personaje instanceof GokuBase ? 15 : 15,
-            personaje instanceof GokuBase ? 85 : 85,
-            personaje instanceof GokuBase ? 10 : 10,
+        super("Golpe",
+            personaje instanceof GokuBase ? 250 : 150,
+            personaje instanceof GokuBase ? 500 : 350,
+            personaje instanceof GokuBase ? 501 : 351,
+            personaje instanceof GokuBase ? 800 : 700,
+            personaje instanceof GokuBase ? 7000 : 10000,
+            personaje instanceof GokuBase ? 5 : 7,
+            personaje instanceof GokuBase ? 80 : 70,
+            personaje instanceof GokuBase ? 20 : 30,
             null, // efectoSecundario
             0,    // efectosTurnosMin
             0     // efectosTurnosMax
