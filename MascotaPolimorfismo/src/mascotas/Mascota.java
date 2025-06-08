@@ -49,7 +49,7 @@ public abstract class Mascota {
 	
 	public void baniarse() {
 		System.out.println("La mascota " + this.nombre + " se esta baniando");
-		this.suciedad -= this.tipo.getPorcentaje();
+		reducirSuciedad(this.tipo.getPorcentaje());
 		this.suciedad = comprobarCaracteristica(this.suciedad);
 		System.out.println("Su suciedad fue reducida en un " + this.tipo.getPorcentaje());
 	}
