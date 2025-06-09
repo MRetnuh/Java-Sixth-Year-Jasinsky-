@@ -49,7 +49,7 @@ private static void batallar() {
 	boolean finPelea = false;
 	
 	do {
-		
+		jugadores[turno].atacar(jugadores[cambiarTurno(turno)]);
 		finPelea = jugadores[turno].comprobarDerrota(jugadores[cambiarTurno(turno)]);
 		turno = cambiarTurno(turno);
 	}while(!finPelea);
