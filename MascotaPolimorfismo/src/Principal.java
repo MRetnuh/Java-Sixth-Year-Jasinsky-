@@ -1,3 +1,5 @@
+import comidas.Comida;
+import comidas.Tienda;
 import juegos.CaraOSeca;
 import juegos.Craps;
 import juegos.Juego;
@@ -60,8 +62,13 @@ private static boolean finJuego = false;
              
              break;
          case 2:
+        	 Comida comidaElegida = jugador.alimentarMascota();
+        	 if(comidaElegida != null) {
+        		 jugador.getMascota().comer(comidaElegida);
+        	 }
              break;
          case 3:
+        	 Tienda.comprarComida(jugador);
              break;
          case 4:
         	 jugador.getMascota().baniarse();
@@ -95,7 +102,7 @@ private static boolean finJuego = false;
         System.out.println("MENU");
         System.out.println("1. Jugar");
         System.out.println("2. Comer");
-        System.out.println("3. Tienda");
+        System.out.println("3. Comprar Comida");
         System.out.println("4. Bañar");
         System.out.println("5. Inventario");
         System.out.println("6. Estadísticas");

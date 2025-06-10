@@ -1,5 +1,7 @@
 package mascotas;
 
+import comidas.Comida;
+
 public abstract class Mascota {
 	private String nombre;
 	private int energia = 50;
@@ -49,8 +51,15 @@ public abstract class Mascota {
 	
 	public void baniarse() {
 		System.out.println("La mascota " + this.nombre + " se esta baniando");
-		reducirSuciedad(this.tipo.getPorcentaje());
+		this.suciedad -= this.tipo.getPorcentaje();
+		this.suciedad = comprobarCaracteristica(this.suciedad);
 		System.out.println("Su suciedad fue reducida en un " + this.tipo.getPorcentaje());
+	}
+	
+	public void comer(Comida comidaElegida) {
+		System.out.println("La mascota disfruto la comida");
+		aumentarSuciedad(comidaElegida.getSuciedad());
+		aumentarEnergia(comidaElegida.getSuenio());
 	}
 	
 	public void aumentarHambre(int aumento) {
