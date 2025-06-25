@@ -1,6 +1,8 @@
 package comidas;
 
-public abstract class Comida {
+import interfaces.Mostrable;
+
+public abstract class Comida implements Mostrable{
 private int hambreReducida;
 private int costo;
 private String nombre;
@@ -24,6 +26,11 @@ public void reducirCantidad() {
 
 public void mostrarDatos() {
 	System.out.println("Nombre: " + this.nombre + " Hambre reducida: " + this.hambreReducida + " Cantidad: " + this.cantidad);
+}
+
+@Override
+public void mostrar() {
+    System.out.println(this.nombre);
 }
 
 public int getSuciedad() {

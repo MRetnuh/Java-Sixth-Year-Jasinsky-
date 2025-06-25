@@ -4,9 +4,10 @@ import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
+import interfaces.Mostrable;
 import personaje.Jugador;
 
-public final class Utiles {
+public final class Utiles{
 
 public static Scanner s = new Scanner(System.in);
 public static Random r = new Random();
@@ -46,5 +47,12 @@ public static int ingresarEntero(final int MIN, final int MAX) {
 	}while(error);
 	
 	return num;
+}
+
+public static void mostrarLista(Mostrable[] lista) {
+    for (int i = 0; i < lista.length; i++) {
+        System.out.print((i + 1) + ". ");
+        lista[i].mostrar();
+    }
 }
 }

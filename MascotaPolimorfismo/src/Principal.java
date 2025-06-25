@@ -1,5 +1,6 @@
 import comidas.Comida;
 import comidas.Tienda;
+import hilos.Tiempo;
 import juegos.CaraOSeca;
 import juegos.Craps;
 import juegos.Juego;
@@ -8,6 +9,7 @@ import mascotas.Koi;
 import mascotas.Mascota;
 import mascotas.MascotaDisponible;
 import mascotas.Mecca;
+import opciones.Opcion;
 import personaje.Jugador;
 import utilidades.Utiles;
 
@@ -16,22 +18,24 @@ private static String[] nombresDisponibles = {"Juan", "Akame", "Najenda", "Pepe"
 "Koro", "Simon", "Vegeta"};
 private static Jugador jugador;
 private static boolean finJuego = false;
-
+private static  Tiempo tiempoContador = new Tiempo();
 	public static void main(String[] args) {
 		crearJugador();
 		escogerNombreMascota();
 		Utiles.jugador = jugador;
 		empezarJuego();
+		tiempoContador.start();
 		Utiles.s.close();
 	}
 	
 	
 	private static void empezarJuego() {
 		do {
+			tiempoContador.start();
 			jugador.mostrarEstadisticas();
             System.out.println("Que desea hacer?");
 			mostrarMenuElegirOpc();
-			int opc = Utiles.ingresarEntero(1, 8);
+			int opc = Utiles.ingresarEntero(1, Opcion.values().length);
 			mostrarOpciones(opc);
 		}while(!finJuego);
 	}
@@ -99,22 +103,14 @@ private static boolean finJuego = false;
 
 
 	private static void mostrarMenuElegirOpc() {
-        System.out.println("MENU");
-        System.out.println("1. Jugar");
-        System.out.println("2. Comer");
-        System.out.println("3. Comprar Comida");
-        System.out.println("4. Bañar");
-        System.out.println("5. Inventario");
-        System.out.println("6. Estadísticas");
-        System.out.println("7. Dormir");
-        System.out.println("8. Salir");
+         Utiles.mostrarLista(Opcion.values());
     }
 	
 	private static void crearJugador() {
 		Mascota mascotaElegida;
 		String nombreJugador;
 		int opcion;
-		int mascota = Utiles.r.nextInt(MascotaDisponible.values().length) + 1;
+		int mascota;
 		System.out.println("Bienvenido a un simulador de comprar y cuidar una mascota");
 		System.out.println("Cree su jugador. Elija si quiere ponerse un nombre o tener uno al azar");
 		System.out.println("1) Elegir nombre");
@@ -128,6 +124,11 @@ private static boolean finJuego = false;
 		else {
 			nombreJugador = nombresDisponibles[Utiles.r.nextInt(nombresDisponibles.length)];
 		}
+		
+		System.out.println("Elija su mascota:");
+		Utiles.mostrarLista(MascotaDisponible.values());
+		
+		mascota = Utiles.ingresarEntero(1, MascotaDisponible.values().length);
 		
 	    mascotaElegida = elegirMascota(mascota);
 	    

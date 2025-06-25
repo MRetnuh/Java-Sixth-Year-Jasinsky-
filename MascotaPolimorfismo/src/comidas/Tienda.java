@@ -1,20 +1,19 @@
 package comidas;
 
+import interfaces.Mostrable;
 import personaje.Jugador;
 import utilidades.Utiles;
 
-public abstract class Tienda {
-private static Comida[] comidasDisponibles ={new Manzana(), new Sushi(), new Fideos()};
+public abstract class Tienda implements Mostrable{
 
 
 
 public static void comprarComida(Jugador jugador) {
+    Comida[] comidasDisponibles ={new Manzana(), new Sushi(), new Fideos()};
 	Comida comidaComprada;
 	System.out.println("Bienvenido a la tienda");
 	System.out.println("Ofrecemos las siguientes comidas");
-	for(int i = 0; i < comidasDisponibles.length; i++) {
-	System.out.println((i+ 1) + ") " + comidasDisponibles[i].getNombre());
-	}
+	Utiles.mostrarLista(comidasDisponibles);
 	System.out.println("Elija una:");
 	int opc = Utiles.ingresarEntero(1, comidasDisponibles.length) - 1;
 	comidaComprada = comidasDisponibles[opc];
