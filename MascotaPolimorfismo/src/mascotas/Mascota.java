@@ -17,6 +17,17 @@ public abstract class Mascota {
 	public void cambiarNombre(String nombreElegido) {
 		this.nombre = nombreElegido;
 	}
+	private void verificarEstado() {
+	    if (this.energia >= 60) {
+	        System.out.println("¡" + this.nombre + " está cansada y necesita dormir!");
+	    }
+	    if (this.energia >= 80) {
+	        System.out.println("¡" + this.nombre + " tiene mucha hambre!");
+	    }
+	    if (this.energia >= 80) {
+	        System.out.println("¡" + this.nombre + " está muy sucia y necesita un baño!");
+	    }
+	}
 
 	public void mostrarEstadisticas() {
 		System.out.println("Nombre: " + this.nombre);
@@ -70,12 +81,15 @@ public abstract class Mascota {
 	public void reducirEnergia(int descenso) {
 		this.energia -= descenso;
 		this.energia = comprobarCaracteristica(this.energia);
+		verificarEstado();
 		
 	}
 	
 	public void aumentarEnergia(int aumento) {
 		this.energia += aumento;
 		this.energia = comprobarCaracteristica(this.energia);
+        verificarEstado();
+		
 	}
 	
 	public void dormir() {

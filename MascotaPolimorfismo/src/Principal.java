@@ -18,13 +18,13 @@ private static String[] nombresDisponibles = {"Juan", "Akame", "Najenda", "Pepe"
 "Koro", "Simon", "Vegeta"};
 private static Jugador jugador;
 private static boolean finJuego = false;
-private static  Tiempo tiempoContador = new Tiempo();
+private static  Tiempo tiempoContador  = new Tiempo();
 	public static void main(String[] args) {
 		crearJugador();
 		escogerNombreMascota();
 		Utiles.jugador = jugador;
+		tiempoContador.getMascota(jugador.getMascota());
 		empezarJuego();
-		tiempoContador.start();
 		Utiles.s.close();
 	}
 	
@@ -88,6 +88,7 @@ private static  Tiempo tiempoContador = new Tiempo();
          case 8:
         	 finJuego = true;
              System.out.println("Gracias por jugar. ¡Hasta la próxima!");
+             tiempoContador.setFinalizado();
              break;
      }
  }
