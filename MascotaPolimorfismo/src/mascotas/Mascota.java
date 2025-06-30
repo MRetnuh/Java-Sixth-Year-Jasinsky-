@@ -1,6 +1,8 @@
 package mascotas;
 
 import comidas.Comida;
+import interfaces.CansancioEventListener;
+import interfaces.ManejadorEstadosMascota;
 
 public abstract class Mascota {
 	private String nombre;
@@ -9,7 +11,10 @@ public abstract class Mascota {
 	private int hambre = 50;
 	private int suciedad = 50;
 	private TipoMascota tipo;
-	
+	private CansancioEventListener listenerCansancio;
+	private boolean cansada = false;
+	private boolean muyCansada = false;
+	private boolean extremadamenteCansada = false;
 	public Mascota(TipoMascota tipo) {
 		this.tipo = tipo;
 	}
@@ -17,18 +22,7 @@ public abstract class Mascota {
 	public void cambiarNombre(String nombreElegido) {
 		this.nombre = nombreElegido;
 	}
-	private void verificarEstado() {
-	    if (this.energia >= 60) {
-	        System.out.println("¡" + this.nombre + " está cansada y necesita dormir!");
-	    }
-	    if (this.energia >= 80) {
-	        System.out.println("¡" + this.nombre + " tiene mucha hambre!");
-	    }
-	    if (this.energia >= 80) {
-	        System.out.println("¡" + this.nombre + " está muy sucia y necesita un baño!");
-	    }
-	}
-
+	
 	public void mostrarEstadisticas() {
 		System.out.println("Nombre: " + this.nombre);
 		System.out.println("Energia: " + this.energia);
@@ -70,7 +64,7 @@ public abstract class Mascota {
 	public void comer(Comida comidaElegida) {
 		System.out.println("La mascota disfruto la comida");
 		aumentarSuciedad(comidaElegida.getSuciedad());
-		aumentarEnergia(comidaElegida.getSuenio());
+		setEnergia(comidaElegida.getSuenio());
 	}
 	
 	public void aumentarHambre(int aumento) {
@@ -78,23 +72,10 @@ public abstract class Mascota {
 		this.hambre = comprobarCaracteristica(this.hambre);	
 	}
 	
-	public void reducirEnergia(int descenso) {
-		this.energia -= descenso;
-		this.energia = comprobarCaracteristica(this.energia);
-		verificarEstado();
-		
-	}
-	
-	public void aumentarEnergia(int aumento) {
-		this.energia += aumento;
-		this.energia = comprobarCaracteristica(this.energia);
-        verificarEstado();
-		
-	}
 	
 	public void dormir() {
 		System.out.println("La mascota " + this.nombre + " se fue a dormir");
-		aumentarEnergia(100);
+		setEnergia(100);
 		aumentarSuciedad(10);
 		aumentarHambre(20);
 		aumentarFelicidad(20);
@@ -113,5 +94,27 @@ public abstract class Mascota {
 		}
 		return atributo;
 	}
-
+	
+	public void setCansancioListener(CansancioEventListener listener) {
+	    this.listenerCansancio = listener;
+	}
+	
+	public void setEnergia(int cambio) {
+		this.energia += cambio;
+		this.energia = comprobarCaracteristica(this.energia);
+		listenerCansancio.verificarCansancio(nombre, this.energia, cansada, muyCansada, extremadamenteCansada);
+	}
+	
+	public void setCansada(boolean siEstaCansada) {
+		this.cansada = siEstaCansada;
+	}
+	
+	public void setMuyCansada(boolean siEstaCansada) {
+		this.muyCansada = siEstaCansada;
+	}
+	
+	public void setExtremadamenteCansada(boolean siEstaCansada) {
+		this.extremadamenteCansada = siEstaCansada;
+	}
+	
 }

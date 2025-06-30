@@ -4,7 +4,7 @@ import mascotas.Mascota;
 
 public class Tiempo extends Thread {
 private Mascota mascotaJugador;
-private final int REDUCCION = 1;
+private final int REDUCCION = -1;
 private boolean finalizado = false;
 
     @Override
@@ -21,7 +21,7 @@ private boolean finalizado = false;
             i++;
             if(i % 4 == 0) {
             	System.out.println("Pasaron 4 segundos");
-            	mascotaJugador.reducirEnergia(REDUCCION);
+            	mascotaJugador.setEnergia(REDUCCION);
             	mascotaJugador.reducirFelicidad(REDUCCION);
             	mascotaJugador.aumentarHambre(REDUCCION);
             	mascotaJugador.aumentarSuciedad(REDUCCION);

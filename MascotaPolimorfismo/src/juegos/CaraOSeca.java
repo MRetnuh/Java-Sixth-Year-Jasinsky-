@@ -41,7 +41,7 @@ public class CaraOSeca extends Juego{
 		jugador.getMascota().reducirFelicidad((int)(apuesta * 0.03));
 		}
 		
-        jugador.getMascota().reducirEnergia(5);
+        jugador.getMascota().setEnergia(-5);
         jugador.getMascota().aumentarHambre(3);
         jugador.getMascota().aumentarSuciedad(5);
 	}

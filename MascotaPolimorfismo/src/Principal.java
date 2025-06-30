@@ -1,6 +1,7 @@
 import comidas.Comida;
 import comidas.Tienda;
 import hilos.Tiempo;
+import interfaces.ManejadorEstadosMascota;
 import juegos.CaraOSeca;
 import juegos.Craps;
 import juegos.Juego;
@@ -22,16 +23,16 @@ private static  Tiempo tiempoContador  = new Tiempo();
 	public static void main(String[] args) {
 		crearJugador();
 		escogerNombreMascota();
+		jugador.getMascota().setCansancioListener(new ManejadorEstadosMascota());
 		Utiles.jugador = jugador;
 		tiempoContador.getMascota(jugador.getMascota());
+		tiempoContador.start();
 		empezarJuego();
 		Utiles.s.close();
 	}
 	
-	
 	private static void empezarJuego() {
 		do {
-			tiempoContador.start();
 			jugador.mostrarEstadisticas();
             System.out.println("Que desea hacer?");
 			mostrarMenuElegirOpc();
